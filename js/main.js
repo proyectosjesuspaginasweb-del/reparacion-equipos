@@ -108,6 +108,7 @@ function initPanelAnimation() {
 
     if (shouldUseNativeScroll) {
         document.body.classList.add("no-gsap-panels");
+        document.body.classList.remove("gsap-panels");
         return;
     }
 

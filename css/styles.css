@@ -652,7 +652,7 @@ body.gsap-panels .contact {
 .contact .section-heading,
 .contact .eyebrow,
 .contact p {
-    color: var(--cream);
+    color: var(--cream);;
 }
 
 .contact-stack {
@@ -769,6 +769,12 @@ body:not(.gsap-panels) .panel-section {
 body:not(.gsap-panels) .outer,
 body:not(.gsap-panels) .inner {
     height: auto;
+    overflow: visible;
+}
+
+body:not(.gsap-panels) .clip-text,
+body:not(.gsap-panels) .heading-char {
+    display: inline;
     overflow: visible;
 }
 
@@ -891,6 +897,13 @@ body:not(.gsap-panels) main {
         grid-template-columns: minmax(0, 1fr);
     }
 
+    .contact .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+    }
+
     .hero .inner,
     .services .inner,
     .process .inner,
@@ -906,6 +919,20 @@ body:not(.gsap-panels) main {
     .process h2,
     .contact h2 {
         max-width: min(680px, calc(100vw - 40px));
+    }
+
+    .contact .panel-copy,
+    .contact .section-heading,
+    .contact .panel-copy p,
+    .contact-stack {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .contact .section-heading {
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: normal;
     }
 
     .hero-copy,
@@ -955,6 +982,17 @@ body:not(.gsap-panels) main {
     .contact h2 {
         font-size: clamp(1.75rem, 9.5vw, 2.35rem);
         text-shadow: 5px 5px 0 rgba(9, 8, 18, .42);
+    }
+
+    .contact .section-heading {
+        max-width: 320px;
+        font-size: clamp(2rem, 10vw, 2.55rem);
+        line-height: .98;
+    }
+
+    .contact .panel-copy p {
+        max-width: 320px;
+        font-size: .98rem;
     }
 
     .hero .inner {
