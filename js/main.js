@@ -104,7 +104,8 @@ function splitHeading(heading) {
 }
 
 function initPanelAnimation() {
-    const shouldUseNativeScroll = window.matchMedia("(max-width: 980px)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shouldUseNativeScroll = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouchViewport = window.matchMedia("(max-width: 980px)").matches;
 
     if (shouldUseNativeScroll) {
         document.body.classList.add("no-gsap-panels");
@@ -132,10 +133,17 @@ function initPanelAnimation() {
     let animating = false;
 
     document.body.classList.add("gsap-panels");
-    gsap.set(outerWrappers.slice(1), { yPercent: 100 });
-    gsap.set(innerWrappers.slice(1), { yPercent: -100 });
-    gsap.set(sections.slice(1), { autoAlpha: 0 });
-    gsap.set(sections[0], { autoAlpha: 1, zIndex: 1 });
+    const initialHashIndex = sections.findIndex((section) => section.id && `#${section.id}` === window.location.hash);
+    const initialIndex = initialHashIndex > 0 ? initialHashIndex : 0;
+
+    gsap.set(outerWrappers, { yPercent: 100 });
+    gsap.set(innerWrappers, { yPercent: -100 });
+    gsap.set(sections, { autoAlpha: 0, zIndex: 0 });
+    gsap.set(outerWrappers[initialIndex], { yPercent: 0 });
+    gsap.set(innerWrappers[initialIndex], { yPercent: 0 });
+    gsap.set(sections[initialIndex], { autoAlpha: 1, zIndex: 1 });
+    gsap.set(backgrounds[initialIndex], { yPercent: 0 });
+    gsap.set(splitHeadings[initialIndex], { autoAlpha: 1, yPercent: 0 });
 
     function setProgress(index) {
         progressItems.forEach((item, itemIndex) => {
@@ -200,12 +208,12 @@ function initPanelAnimation() {
     }
 
     Observer.create({
-        type: "wheel",
+        type: isTouchViewport ? "wheel,touch" : "wheel",
         wheelSpeed: -1,
         onDown: (observer) => canNavigateWithWheel(observer) && gotoSection(currentIndex - 1, -1),
         onUp: (observer) => canNavigateWithWheel(observer) && gotoSection(currentIndex + 1, 1),
-        tolerance: 10,
-        preventDefault: false,
+        tolerance: isTouchViewport ? 28 : 10,
+        preventDefault: isTouchViewport,
         ignore: "input, textarea, button, a, .slider-shell"
     });
 
@@ -220,8 +228,8 @@ function initPanelAnimation() {
     });
 
     window.techRepairGoToSection = gotoSection;
-    currentIndex = 0;
-    setProgress(0);
+    currentIndex = initialIndex;
+    setProgress(initialIndex);
 }
 
 window.addEventListener("load", initPanelAnimation);
