@@ -5,7 +5,7 @@ const nextButton = document.querySelector("[data-slider-next]");
 const contactForm = document.querySelector(".contact-form");
 const assistantButtons = Array.from(document.querySelectorAll("[data-assistant-message]"));
 const whatsappFloat = document.querySelector("[data-whatsapp-float]");
-const whatsappNumber = "5210000000000";
+const whatsappNumber = "527227729418";
 
 let activeIndex = 0;
 let autoplayId;
@@ -143,7 +143,7 @@ function initPanelAnimation() {
     gsap.set(innerWrappers[initialIndex], { yPercent: 0 });
     gsap.set(sections[initialIndex], { autoAlpha: 1, zIndex: 1 });
     gsap.set(backgrounds[initialIndex], { yPercent: 0 });
-    gsap.set(splitHeadings[initialIndex], { autoAlpha: 1, yPercent: 0 });
+    gsap.set(splitHeadings[initialIndex], { autoAlpha: 1, yPercent: 0, rotation: 0 });
 
     function setProgress(index) {
         progressItems.forEach((item, itemIndex) => {
@@ -186,14 +186,16 @@ function initPanelAnimation() {
             }, 0)
             .fromTo(splitHeadings[index], {
                 autoAlpha: 0,
-                yPercent: 150 * dFactor
+                yPercent: () => gsap.utils.random(-200, 200) * dFactor,
+                rotation: () => gsap.utils.random(-20, 20)
             }, {
                 autoAlpha: 1,
                 yPercent: 0,
-                duration: .8,
-                ease: "power2",
+                rotation: 0,
+                duration: .85,
+                ease: "back.out(1.2)",
                 stagger: {
-                    each: .018,
+                    each: .02,
                     from: "random"
                 }
             }, .18);
