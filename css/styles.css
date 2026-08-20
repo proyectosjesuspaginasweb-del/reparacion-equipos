@@ -1,13 +1,17 @@
 :root {
-    --ink: #151515;
-    --paper: #f8f3e8;
-    --cream: #fff9ed;
-    --red: #e9412f;
-    --blue: #2367d1;
-    --yellow: #f4c542;
-    --line: #151515;
-    --muted: #5e5b52;
-    --shadow: 10px 10px 0 var(--ink);
+    --ink: #090812;
+    --paper: #140b24;
+    --cream: #fff0c7;
+    --red: #ff3f6d;
+    --blue: #3b63ff;
+    --yellow: #ffd447;
+    --orange: #ff7a1a;
+    --pink: #ff4fb8;
+    --violet: #6a35ff;
+    --cyan: #20d6ff;
+    --line: #090812;
+    --muted: #f7c9a8;
+    --shadow: 12px 12px 0 rgba(9, 8, 18, .95);
 }
 
 * {
@@ -21,9 +25,9 @@ html {
 body {
     margin: 0;
     font-family: "Inter", Arial, sans-serif;
-    color: var(--ink);
-    background: linear-gradient(90deg, rgba(21, 21, 21, .05) 1px, transparent 1px), linear-gradient(rgba(21, 21, 21, .05) 1px, transparent 1px), var(--paper);
-    background-size: 34px 34px;
+    color: var(--cream);
+    background: var(--paper);
+    overflow-x: hidden;
 }
 
 body.gsap-panels {
@@ -52,10 +56,11 @@ textarea {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 18px clamp(18px, 4vw, 56px);
-    background: rgba(248, 243, 232, .92);
+    padding: 14px clamp(16px, 4vw, 56px);
+    background: rgba(9, 8, 18, .78);
     border-bottom: 3px solid var(--line);
     backdrop-filter: blur(12px);
+    box-shadow: 0 12px 40px rgba(255, 79, 184, .18);
 }
 
 .brand,
@@ -76,22 +81,24 @@ textarea {
     width: 42px;
     height: 42px;
     place-items: center;
-    color: var(--cream);
-    background: var(--ink);
+    color: var(--ink);
+    background: linear-gradient(135deg, var(--yellow), var(--pink));
     border-radius: 50%;
 }
 
 .main-nav {
     gap: 24px;
     font-weight: 700;
+    min-width: 0;
 }
 
 .main-nav a {
+    white-space: nowrap;
     border-bottom: 3px solid transparent;
 }
 
 .main-nav a:hover {
-    border-color: var(--red);
+    border-color: var(--yellow);
 }
 
 .header-action,
@@ -102,6 +109,7 @@ textarea {
     justify-content: center;
     padding: 0 18px;
     border: 3px solid var(--line);
+    color: var(--ink);
     font-weight: 900;
     box-shadow: 5px 5px 0 var(--ink);
     transition: transform .2s ease, box-shadow .2s ease;
@@ -116,7 +124,7 @@ textarea {
 
 .header-action,
 .button.primary {
-    background: var(--yellow);
+    background: linear-gradient(135deg, var(--yellow), var(--orange), var(--pink));
 }
 
 .button.secondary {
@@ -144,22 +152,27 @@ textarea {
 
 .inner {
     display: grid;
+    width: min(100%, 1760px);
     align-items: center;
+    margin: 0 auto;
     padding-top: 82px;
 }
 
 .hero .inner {
-    grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
-    gap: clamp(28px, 5vw, 70px);
-    padding: clamp(36px, 6vw, 78px) clamp(18px, 4vw, 56px);
-    padding-top: calc(82px + clamp(36px, 6vw, 78px));
+    grid-template-columns: minmax(320px, .85fr) minmax(420px, .95fr);
+    gap: clamp(28px, 4vw, 88px);
+    padding: clamp(30px, 5vw, 96px) clamp(18px, 4vw, 72px);
+    padding-top: calc(74px + clamp(30px, 5vw, 96px));
 }
 
 .bg {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: var(--paper);
+    background:
+        radial-gradient(circle at 18% 16%, rgba(255, 212, 71, .95) 0 8%, transparent 20%),
+        radial-gradient(circle at 84% 18%, rgba(255, 79, 184, .92) 0 10%, transparent 24%),
+        linear-gradient(135deg, #17102f 0%, #4b155c 38%, #ff5b35 70%, #ffd447 100%);
     will-change: transform;
 }
 
@@ -167,29 +180,53 @@ textarea {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(21, 21, 21, .07) 1px, transparent 1px), linear-gradient(rgba(21, 21, 21, .07) 1px, transparent 1px);
-    background-size: 34px 34px;
+    background:
+        linear-gradient(90deg, rgba(9, 8, 18, .18) 1px, transparent 1px),
+        linear-gradient(rgba(9, 8, 18, .18) 1px, transparent 1px),
+        radial-gradient(circle at 50% 120%, rgba(9, 8, 18, .72), transparent 42%);
+    background-size: 42px 42px, 42px 42px, auto;
 }
 
 .bg-yellow {
-    background: var(--yellow);
+    background:
+        linear-gradient(135deg, rgba(255, 212, 71, .98), rgba(255, 122, 26, .92) 40%, rgba(255, 79, 184, .92)),
+        var(--yellow);
 }
 
 .bg-ink {
-    background: var(--ink);
+    background:
+        radial-gradient(circle at 22% 24%, rgba(32, 214, 255, .35), transparent 26%),
+        radial-gradient(circle at 82% 72%, rgba(255, 79, 184, .35), transparent 28%),
+        linear-gradient(145deg, #05040b 0%, #180c2e 52%, #3c154a 100%);
 }
 
 .bg-blue {
-    background: var(--blue);
+    background:
+        linear-gradient(135deg, rgba(59, 99, 255, .95), rgba(106, 53, 255, .9) 44%, rgba(255, 63, 109, .95)),
+        var(--blue);
 }
 
 .panel-copy,
 .slider-shell,
 .service-grid,
 .process-list,
-.contact-form {
+.contact-form,
+.virtual-assistant,
+.floating-actions {
     position: relative;
     z-index: 1;
+}
+
+.hero-copy,
+.panel-copy,
+.slider-shell,
+.service-grid,
+.process-list,
+.contact-stack,
+.contact-form,
+.virtual-assistant {
+    min-width: 0;
+    max-width: 100%;
 }
 
 .clip-text {
@@ -209,6 +246,8 @@ textarea {
     font-weight: 900;
     letter-spacing: 0;
     text-transform: uppercase;
+    color: white!important;
+    text-shadow: 3px 3px 0 rgba(9, 8, 18, .45);
 }
 
 .hero h1,
@@ -216,24 +255,28 @@ textarea {
 .process h2,
 .contact h2 {
     margin: 0;
-    max-width: 760px;
-    font-size: clamp(2.4rem, 7vw, 6.8rem);
+    max-width: 920px;
+    font-size: clamp(2.35rem, 4.7vw, 7.6rem);
     line-height: .92;
     letter-spacing: 0;
     text-transform: uppercase;
+    color: var(--cream);
+    text-shadow: 8px 8px 0 rgba(9, 8, 18, .42);
+    text-wrap: balance;
+    overflow-wrap: break-word;
 }
 
 .services h2,
 .process h2,
 .contact h2 {
-    font-size: clamp(2rem, 5vw, 4.8rem);
+    font-size: clamp(2rem, 4.2vw, 6.2rem);
 }
 
 .hero-text {
-    max-width: 620px;
+    max-width: 720px;
     margin: 24px 0 0;
-    color: var(--muted);
-    font-size: clamp(1rem, 2vw, 1.22rem);
+    color: #ffe0ba;
+    font-size: clamp(1rem, 1.4vw, 1.45rem);
     line-height: 1.6;
 }
 
@@ -245,11 +288,12 @@ textarea {
 
 .slider-shell {
     position: relative;
-    min-height: 620px;
+    min-height: clamp(620px, 68vh, 820px);
     padding: 18px;
     border: 4px solid var(--line);
-    background: var(--cream);
+    background: rgba(255, 240, 199, .92);
     box-shadow: var(--shadow);
+    color: var(--ink);
 }
 
 .slider-toolbar {
@@ -272,7 +316,7 @@ textarea {
     height: 44px;
     place-items: center;
     border: 3px solid var(--line);
-    background: white;
+    background: var(--yellow);
     box-shadow: 4px 4px 0 var(--ink);
     cursor: pointer;
 }
@@ -284,7 +328,7 @@ textarea {
 
 .slider {
     position: relative;
-    min-height: 520px;
+    min-height: clamp(520px, 58vh, 720px);
     overflow: hidden;
 }
 
@@ -308,18 +352,20 @@ textarea {
 
 .bauhaus-scene {
     position: relative;
-    min-height: 330px;
+    min-height: clamp(260px, 32vh, 440px);
     overflow: hidden;
     border: 3px solid var(--line);
-    background: var(--yellow);
+    background:
+        linear-gradient(135deg, rgba(255, 212, 71, .95), rgba(255, 122, 26, .9)),
+        var(--yellow);
 }
 
 .scene-red {
-    background: var(--red);
+    background: linear-gradient(135deg, var(--pink), var(--red), var(--orange));
 }
 
 .scene-blue {
-    background: var(--blue);
+    background: linear-gradient(135deg, var(--blue), var(--violet), var(--cyan));
 }
 
 .shape,
@@ -334,7 +380,7 @@ textarea {
     height: 175px;
     top: 32px;
     left: 28px;
-    background: var(--blue);
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
     border-radius: 50%;
 }
 
@@ -343,7 +389,7 @@ textarea {
     height: 54px;
     right: -42px;
     bottom: 64px;
-    background: var(--red);
+    background: var(--pink);
     transform: rotate(-12deg);
 }
 
@@ -379,7 +425,7 @@ textarea {
     height: 250px;
     left: 42%;
     top: 28px;
-    background: var(--blue);
+    background: var(--cyan);
 }
 
 .dot-grid {
@@ -405,7 +451,7 @@ textarea {
     height: 92px;
     right: 30px;
     bottom: 42px;
-    background: var(--red);
+    background: var(--orange);
 }
 
 .device {
@@ -475,13 +521,13 @@ textarea {
 .slide-copy {
     padding: 18px;
     border: 3px solid var(--line);
-    background: white;
+    background: var(--cream);
 }
 
 .slide-kicker,
 .service-number {
     margin: 0 0 8px;
-    color: var(--red);
+    color: #05040b;
     font-weight: 900;
 }
 
@@ -496,7 +542,7 @@ textarea {
 .services p,
 .process-list,
 .contact p {
-    color: var(--muted);
+    color: var(--line);
     line-height: 1.6;
 }
 
@@ -515,7 +561,7 @@ textarea {
 }
 
 .dot.is-active {
-    background: var(--ink);
+    background: var(--pink);
 }
 
 .services,
@@ -556,8 +602,9 @@ body.gsap-panels .contact {
     min-height: 220px;
     padding: 22px;
     border: 3px solid var(--line);
-    background: var(--cream);
+    background: rgba(255, 240, 199, .92);
     box-shadow: 6px 6px 0 var(--ink);
+    color: var(--ink);
 }
 
 .service-grid h3 {
@@ -573,7 +620,7 @@ body.gsap-panels .contact {
 
 .process .eyebrow,
 .process-list {
-    color: var(--cream);
+    color: white;
 }
 
 .process-list {
@@ -586,6 +633,8 @@ body.gsap-panels .contact {
 .process-list div {
     padding: 18px;
     border: 3px solid var(--cream);
+    background: rgba(255, 79, 184, .12);
+    box-shadow: 6px 6px 0 rgba(255, 212, 71, .85);
 }
 
 .contact {
@@ -606,13 +655,71 @@ body.gsap-panels .contact {
     color: var(--cream);
 }
 
+.contact-stack {
+    display: grid;
+    gap: 18px;
+}
+
+.virtual-assistant,
 .contact-form {
     display: grid;
     gap: 16px;
     padding: 22px;
     border: 3px solid var(--line);
-    background: var(--yellow);
     box-shadow: var(--shadow);
+}
+
+.virtual-assistant {
+    background: rgba(255, 240, 199, .95);
+    color: var(--ink);
+}
+
+.virtual-assistant h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.virtual-assistant p {
+    margin: 0;
+    color: #68414e;
+    line-height: 1.5;
+}
+
+.assistant-label {
+    color: var(--red) !important;
+    font-size: .75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.assistant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.assistant-options button {
+    min-height: 40px;
+    padding: 0 12px;
+    border: 3px solid var(--line);
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    color: var(--ink);
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.assistant-options button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
+}
+
+.contact-form {
+    background: linear-gradient(135deg, var(--yellow), var(--orange), var(--pink));
+    color: var(--ink);
 }
 
 .contact-form label {
@@ -649,7 +756,7 @@ body.gsap-panels .contact {
 }
 
 .panel-progress span.is-active {
-    background: var(--red);
+    background: var(--pink);
 }
 
 body:not(.gsap-panels) .panel-section {
@@ -669,29 +776,148 @@ body:not(.gsap-panels) .panel-progress {
     display: none;
 }
 
-@media (max-width: 900px) {
+body:not(.gsap-panels) main {
+    padding-bottom: 96px;
+}
+
+@media (min-width: 1920px) {
+    .inner {
+        width: min(100%, 1900px);
+    }
+
     .site-header {
-        align-items: flex-start;
+        padding-left: max(56px, calc((100vw - 1900px) / 2 + 56px));
+        padding-right: max(56px, calc((100vw - 1900px) / 2 + 56px));
+    }
+
+    .brand {
+        font-size: 1.1rem;
     }
 
     .main-nav {
+        font-size: 1.05rem;
+    }
+
+    .service-grid h3 {
+        font-size: 1.8rem;
+    }
+
+    .service-grid article,
+    .process-list div,
+    .virtual-assistant,
+    .contact-form {
+        font-size: 1.08rem;
+    }
+}
+
+.floating-actions {
+    position: fixed;
+    inset: auto 22px 22px 22px;
+    z-index: 12;
+    pointer-events: none;
+}
+
+.floating-button {
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    width: 60px;
+    height: 60px;
+    place-items: center;
+    border: 3px solid var(--line);
+    color: var(--ink);
+    font-weight: 900;
+    box-shadow: 6px 6px 0 var(--ink);
+    pointer-events: auto;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.floating-button:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--ink);
+}
+
+.floating-home {
+    left: 0;
+    background: var(--cream);
+}
+
+.floating-home span {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.floating-whatsapp {
+    right: 0;
+    background: linear-gradient(135deg, #25d366, var(--cyan));
+}
+
+.floating-whatsapp span {
+    font-size: 1rem;
+    letter-spacing: 0;
+}
+
+@media (max-width: 980px) {
+    .site-header {
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px 14px;
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 4px 0 2px;
+        scrollbar-width: none;
+    }
+
+    .main-nav::-webkit-scrollbar {
         display: none;
+    }
+
+    .main-nav a {
+        flex: 0 0 auto;
+        padding: 8px 10px;
+        border: 2px solid rgba(255, 240, 199, .5);
+        background: rgba(255, 240, 199, .12);
+        color: var(--cream);
+        font-size: .9rem;
     }
 
     .hero .inner,
     .contact .inner {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .hero .inner,
     .services .inner,
     .process .inner,
     .contact .inner {
+        width: 100%;
         overflow-y: auto;
+        padding-left: clamp(16px, 4vw, 34px);
+        padding-right: clamp(16px, 4vw, 34px);
+    }
+
+    .hero h1,
+    .services h2,
+    .process h2,
+    .contact h2 {
+        max-width: min(680px, calc(100vw - 40px));
+    }
+
+    .hero-copy,
+    .panel-copy,
+    .slider-shell,
+    .contact-stack {
+        width: 100%;
+        max-width: calc(100vw - 40px);
     }
 
     .slider-shell {
-        min-height: 560px;
+        min-height: 520px;
     }
 
     .service-grid,
@@ -702,19 +928,67 @@ body:not(.gsap-panels) .panel-progress {
 
 @media (max-width: 560px) {
     .site-header {
-        gap: 12px;
+        gap: 10px;
+        padding: 10px 12px;
     }
 
     .brand span:last-child {
-        display: none;
+        display: inline;
+        font-size: .95rem;
     }
 
     .header-action {
-        display: none;
+        min-height: 38px;
+        padding: 0 10px;
+        font-size: .78rem;
+        box-shadow: 3px 3px 0 var(--ink);
     }
 
     .hero h1 {
-        font-size: 2.55rem;
+        font-size: clamp(1.9rem, 11vw, 2.55rem);
+        max-width: 320px;
+        text-shadow: 5px 5px 0 rgba(9, 8, 18, .42);
+    }
+
+    .services h2,
+    .process h2,
+    .contact h2 {
+        font-size: clamp(1.75rem, 9.5vw, 2.35rem);
+        text-shadow: 5px 5px 0 rgba(9, 8, 18, .42);
+    }
+
+    .hero .inner {
+        padding-top: 138px;
+    }
+
+    .services .inner,
+    .process .inner,
+    .contact .inner {
+        padding-top: 138px;
+    }
+
+    .hero-text {
+        max-width: 320px;
+        margin-top: 16px;
+        font-size: .98rem;
+    }
+
+    .hero-copy,
+    .panel-copy,
+    .slider-shell,
+    .contact-stack {
+        max-width: calc(100vw - 28px);
+    }
+
+    .hero-actions {
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .button {
+        width: 100%;
+        min-height: 44px;
+        padding: 0 12px;
     }
 
     .panel-progress {
@@ -727,12 +1001,40 @@ body:not(.gsap-panels) .panel-progress {
     }
 
     .slider-shell,
-    .contact-form {
+    .contact-form,
+    .virtual-assistant {
         box-shadow: 6px 6px 0 var(--ink);
     }
 
+    .slider-shell {
+        min-height: 470px;
+        padding: 12px;
+    }
+
+    .slider {
+        min-height: 388px;
+    }
+
+    .slide-copy {
+        padding: 14px;
+    }
+
+    .slide-copy h2 {
+        font-size: clamp(1.35rem, 8vw, 2rem);
+    }
+
+    .floating-actions {
+        inset: auto 14px 14px 14px;
+    }
+
+    .floating-button {
+        width: 52px;
+        height: 52px;
+        box-shadow: 4px 4px 0 var(--ink);
+    }
+
     .bauhaus-scene {
-        min-height: 280px;
+        min-height: 230px;
     }
 
     .circle {

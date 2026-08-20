@@ -3,6 +3,9 @@ const dots = Array.from(document.querySelectorAll("[data-slide-dot]"));
 const previousButton = document.querySelector("[data-slider-prev]");
 const nextButton = document.querySelector("[data-slider-next]");
 const contactForm = document.querySelector(".contact-form");
+const assistantButtons = Array.from(document.querySelectorAll("[data-assistant-message]"));
+const whatsappFloat = document.querySelector("[data-whatsapp-float]");
+const whatsappNumber = "5210000000000";
 
 let activeIndex = 0;
 let autoplayId;
@@ -44,16 +47,30 @@ dots.forEach((dot) => {
 });
 
 if (contactForm) {
+    const messageInput = contactForm.querySelector('textarea[name="message"]');
+
     contactForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
         const data = new FormData(contactForm);
         const name = data.get("name") || "Hola";
         const message = data.get("message") || "Necesito una revision tecnica.";
-        const text = `${name}: ${message}`;
+        const text = `Hola, soy ${name}. ${message}`;
 
-        window.location.href = `mailto:contacto@techrepair.local?subject=Revision tecnica&body=${encodeURIComponent(text)}`;
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     });
+
+    assistantButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            messageInput.value = button.dataset.assistantMessage;
+            messageInput.focus();
+        });
+    });
+}
+
+if (whatsappFloat) {
+    const defaultText = "Hola, necesito una revision tecnica para mi equipo.";
+    whatsappFloat.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultText)}`;
 }
 
 startAutoplay();
@@ -87,7 +104,7 @@ function splitHeading(heading) {
 }
 
 function initPanelAnimation() {
-    const shouldUseNativeScroll = window.matchMedia("(max-width: 760px)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shouldUseNativeScroll = window.matchMedia("(max-width: 980px)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (shouldUseNativeScroll) {
         document.body.classList.add("no-gsap-panels");
@@ -114,9 +131,10 @@ function initPanelAnimation() {
     let animating = false;
 
     document.body.classList.add("gsap-panels");
-    gsap.set(outerWrappers, { yPercent: 100 });
-    gsap.set(innerWrappers, { yPercent: -100 });
-    gsap.set(sections, { autoAlpha: 0 });
+    gsap.set(outerWrappers.slice(1), { yPercent: 100 });
+    gsap.set(innerWrappers.slice(1), { yPercent: -100 });
+    gsap.set(sections.slice(1), { autoAlpha: 0 });
+    gsap.set(sections[0], { autoAlpha: 1, zIndex: 1 });
 
     function setProgress(index) {
         progressItems.forEach((item, itemIndex) => {
@@ -175,13 +193,18 @@ function initPanelAnimation() {
         setProgress(index);
     }
 
+    function canNavigateWithWheel(observer) {
+        const event = observer.event;
+        return !animating && !event.ctrlKey && !event.metaKey;
+    }
+
     Observer.create({
-        type: "wheel,touch,pointer",
+        type: "wheel",
         wheelSpeed: -1,
-        onDown: () => !animating && gotoSection(currentIndex - 1, -1),
-        onUp: () => !animating && gotoSection(currentIndex + 1, 1),
+        onDown: (observer) => canNavigateWithWheel(observer) && gotoSection(currentIndex - 1, -1),
+        onUp: (observer) => canNavigateWithWheel(observer) && gotoSection(currentIndex + 1, 1),
         tolerance: 10,
-        preventDefault: true,
+        preventDefault: false,
         ignore: "input, textarea, button, a, .slider-shell"
     });
 
@@ -196,7 +219,8 @@ function initPanelAnimation() {
     });
 
     window.techRepairGoToSection = gotoSection;
-    gotoSection(0, 1);
+    currentIndex = 0;
+    setProgress(0);
 }
 
 window.addEventListener("load", initPanelAnimation);

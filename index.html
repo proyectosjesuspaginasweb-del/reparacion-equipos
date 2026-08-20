@@ -32,9 +32,9 @@
             <div class="outer">
                 <div class="inner">
             <div class="hero-copy panel-copy">
-                <p class="eyebrow">Soporte tecnico local</p>
-                <h1 class="section-heading" id="hero-title">Repara, optimiza y protege tus equipos.</h1>
-                <p class="hero-text">Diagnostico claro para computadoras, laptops y celulares. Te explicamos el problema, el costo y el tiempo antes de tocar tu equipo.</p>
+                <p class="eyebrow">Soporte tecnico urgente</p>
+                <h1 class="section-heading" id="hero-title">Tu equipo vuelve a la accion.</h1>
+                <p class="hero-text">Diagnostico claro para computadoras, laptops y celulares. Sin vueltas: revisamos la falla, explicamos el riesgo y te decimos cuanto cuesta antes de reparar.</p>
                 <div class="hero-actions">
                     <a class="button primary" href="#contacto" data-panel-target="3">Solicitar revision</a>
                     <a class="button secondary" href="#servicios" data-panel-target="1">Ver servicios</a>
@@ -43,7 +43,7 @@
 
             <section class="slider-shell" aria-label="Servicios destacados">
                 <div class="slider-toolbar">
-                    <span>Servicios clave</span>
+                    <span>Modo reparacion</span>
                     <div class="slider-controls">
                         <button class="icon-button" type="button" data-slider-prev aria-label="Servicio anterior"><span aria-hidden="true">‹</span></button>
                         <button class="icon-button" type="button" data-slider-next aria-label="Servicio siguiente"><span aria-hidden="true">›</span></button>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="slide-copy">
                             <p class="slide-kicker">01 / Computo</p>
-                            <h2>Mantenimiento preventivo</h2>
+                            <h2>Mantenimiento extremo</h2>
                             <p>Limpieza interna, cambio de pasta termica, revision de ventilacion y optimizacion de arranque.</p>
                         </div>
                     </article>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="slide-copy">
                             <p class="slide-kicker">02 / Celulares</p>
-                            <h2>Revision y reparacion</h2>
+                            <h2>Rescate movil</h2>
                             <p>Diagnostico de carga, pantalla, bateria, sistema lento y respaldos antes de reinstalar.</p>
                         </div>
                     </article>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="slide-copy">
                             <p class="slide-kicker">03 / Seguridad</p>
-                            <h2>Formateo responsable</h2>
+                            <h2>Sistema limpio</h2>
                             <p>Respaldo, instalacion limpia, drivers, programas basicos y configuracion segura para trabajar.</p>
                         </div>
                     </article>
@@ -109,8 +109,8 @@
             <div class="outer">
                 <div class="inner">
             <div class="panel-copy">
-                <p class="eyebrow">Que resolvemos</p>
-                <h2 class="section-heading" id="services-title">Servicios con diagnostico antes de cobrar.</h2>
+                <p class="eyebrow">Servicios clave</p>
+                <h2 class="section-heading" id="services-title">Fallos tecnicos bajo control.</h2>
             </div>
             <div class="service-grid">
                 <article>
@@ -138,7 +138,7 @@
             <div class="outer">
                 <div class="inner">
             <p class="eyebrow">Proceso</p>
-            <h2 class="section-heading" id="process-title">Primero entendemos el problema, luego reparamos.</h2>
+            <h2 class="section-heading" id="process-title">Primero cazamos la falla, luego reparamos.</h2>
             <div class="process-list">
                 <div><strong>1.</strong> Recibimos sintomas y datos del equipo.</div>
                 <div><strong>2.</strong> Revisamos causa probable y riesgos.</div>
@@ -153,15 +153,28 @@
             <div class="outer">
                 <div class="inner">
             <div class="panel-copy">
-                <p class="eyebrow">Contacto</p>
-                <h2 class="section-heading" id="contact-title">Agenda una revision tecnica.</h2>
+                <p class="eyebrow">Contacto directo</p>
+                <h2 class="section-heading" id="contact-title">Manda la alerta por WhatsApp.</h2>
                 <p>Describe el equipo, la falla y desde cuando ocurre. Mientras mas concreto seas, mas rapido se puede diagnosticar.</p>
             </div>
-            <form class="contact-form">
-                <label>Nombre<input type="text" name="name" placeholder="Tu nombre"></label>
-                <label>Equipo y falla<textarea name="message" rows="4" placeholder="Ejemplo: laptop HP se apaga despues de 10 minutos"></textarea></label>
-                <button class="button primary" type="submit">Preparar mensaje</button>
-            </form>
+            <div class="contact-stack">
+                <aside class="virtual-assistant" aria-labelledby="assistant-title">
+                    <p class="assistant-label">Asistente virtual</p>
+                    <h3 id="assistant-title">Hola, soy tu filtro tecnico.</h3>
+                    <p>Elige una opcion y te preparo el mensaje para WhatsApp. Piensalo como un recepcionista: primero ordena el problema, despues lo manda al tecnico.</p>
+                    <div class="assistant-options">
+                        <button type="button" data-assistant-message="Mi computadora esta lenta y necesito una revision de mantenimiento.">PC lenta</button>
+                        <button type="button" data-assistant-message="Mi laptop se calienta o se apaga y necesito diagnostico.">Se calienta</button>
+                        <button type="button" data-assistant-message="Mi celular tiene una falla y quiero saber si se puede revisar.">Celular</button>
+                    </div>
+                </aside>
+
+                <form class="contact-form">
+                    <label>Nombre<input type="text" name="name" placeholder="Tu nombre"></label>
+                    <label>Equipo y falla<textarea name="message" rows="4" placeholder="Ejemplo: laptop HP se apaga despues de 10 minutos"></textarea></label>
+                    <button class="button primary" type="submit">Enviar por WhatsApp</button>
+                </form>
+            </div>
                 </div>
             </div>
         </section>
@@ -172,6 +185,15 @@
         <span></span>
         <span></span>
         <span></span>
+    </div>
+
+    <div class="floating-actions" aria-label="Accesos rapidos">
+        <a class="floating-button floating-home" href="#" data-panel-target="0" aria-label="Volver al inicio">
+            <span aria-hidden="true">↑</span>
+        </a>
+        <a class="floating-button floating-whatsapp" href="#" data-whatsapp-float target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+            <span aria-hidden="true">WA</span>
+        </a>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
