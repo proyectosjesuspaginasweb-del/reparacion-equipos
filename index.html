@@ -154,21 +154,10 @@
                 <div class="inner">
             <div class="panel-copy">
                 <p class="eyebrow">Contacto directo</p>
-                <h2 class="section-heading" id="contact-title">Manda la alerta por WhatsApp.</h2>
-                <p>Describe el equipo, la falla y desde cuando ocurre. Mientras mas concreto seas, mas rapido se puede diagnosticar.</p>
+                <h2 class="section-heading" id="contact-title">WhatsApp.</h2>
+                <p>Describe tu equipo y falla. Te respondemos por WhatsApp.</p>
             </div>
             <div class="contact-stack">
-                <aside class="virtual-assistant" aria-labelledby="assistant-title">
-                    <p class="assistant-label">Asistente virtual</p>
-                    <h3 id="assistant-title">Hola, soy tu filtro tecnico.</h3>
-                    <p>Elige una opcion y te preparo el mensaje para WhatsApp. Piensalo como un recepcionista: primero ordena el problema, despues lo manda al tecnico.</p>
-                    <div class="assistant-options">
-                        <button type="button" data-assistant-message="Mi computadora esta lenta y necesito una revision de mantenimiento.">PC lenta</button>
-                        <button type="button" data-assistant-message="Mi laptop se calienta o se apaga y necesito diagnostico.">Se calienta</button>
-                        <button type="button" data-assistant-message="Mi celular tiene una falla y quiero saber si se puede revisar.">Celular</button>
-                    </div>
-                </aside>
-
                 <form class="contact-form">
                     <label>Nombre<input type="text" name="name" placeholder="Tu nombre"></label>
                     <label>Equipo y falla<textarea name="message" rows="4" placeholder="Ejemplo: laptop HP se apaga despues de 10 minutos"></textarea></label>
@@ -191,10 +180,26 @@
         <a class="floating-button floating-home" href="#" data-panel-target="0" aria-label="Volver al inicio">
             <span aria-hidden="true">↑</span>
         </a>
-        <a class="floating-button floating-whatsapp" href="#" data-whatsapp-float target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+        <button class="floating-button floating-whatsapp" type="button" data-chat-toggle aria-expanded="false" aria-controls="support-chat" aria-label="Abrir asistente de WhatsApp">
             <span aria-hidden="true">WA</span>
-        </a>
+        </button>
     </div>
+
+    <aside class="virtual-assistant chat-widget" id="support-chat" aria-labelledby="assistant-title" aria-hidden="true">
+        <p class="assistant-label">Asistente virtual</p>
+        <h3 id="assistant-title">Hola, soy tu filtro tecnico.</h3>
+        <p data-bot-question>Te hare unas preguntas cortas para mandar el reporte completo por WhatsApp.</p>
+        <div class="bot-answers" data-bot-answers aria-live="polite"></div>
+        <div class="bot-controls">
+            <input type="text" data-bot-input placeholder="Escribe aqui tu respuesta" aria-label="Respuesta para el asistente">
+            <button type="button" data-bot-next>Responder</button>
+        </div>
+        <div class="assistant-options" data-bot-options></div>
+        <div class="bot-actions">
+            <button type="button" data-bot-back>Anterior</button>
+            <button type="button" data-bot-reset>Reiniciar</button>
+        </div>
+    </aside>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js"></script>

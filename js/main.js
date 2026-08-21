@@ -3,8 +3,15 @@ const dots = Array.from(document.querySelectorAll("[data-slide-dot]"));
 const previousButton = document.querySelector("[data-slider-prev]");
 const nextButton = document.querySelector("[data-slider-next]");
 const contactForm = document.querySelector(".contact-form");
-const assistantButtons = Array.from(document.querySelectorAll("[data-assistant-message]"));
-const whatsappFloat = document.querySelector("[data-whatsapp-float]");
+const chatToggle = document.querySelector("[data-chat-toggle]");
+const chatWidget = document.querySelector(".chat-widget");
+const botQuestion = document.querySelector("[data-bot-question]");
+const botAnswers = document.querySelector("[data-bot-answers]");
+const botInput = document.querySelector("[data-bot-input]");
+const botNext = document.querySelector("[data-bot-next]");
+const botBack = document.querySelector("[data-bot-back]");
+const botReset = document.querySelector("[data-bot-reset]");
+const botOptions = document.querySelector("[data-bot-options]");
 const whatsappNumber = "527227729418";
 
 let activeIndex = 0;
@@ -47,6 +54,7 @@ dots.forEach((dot) => {
 });
 
 if (contactForm) {
+    const nameInput = contactForm.querySelector('input[name="name"]');
     const messageInput = contactForm.querySelector('textarea[name="message"]');
 
     contactForm.addEventListener("submit", (event) => {
@@ -60,17 +68,199 @@ if (contactForm) {
         window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     });
 
-    assistantButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            messageInput.value = button.dataset.assistantMessage;
-            messageInput.focus();
+    function createWhatsappLink(text) {
+        return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    }
+
+    function initSupportBot() {
+        if (!botQuestion || !botAnswers || !botInput || !botNext || !botBack || !botReset || !botOptions) {
+            return;
+        }
+
+        const steps = [
+            {
+                key: "name",
+                label: "Nombre",
+                question: "Primero dime tu nombre.",
+                placeholder: "Ejemplo: Jesus"
+            },
+            {
+                key: "device",
+                label: "Equipo",
+                question: "Que equipo necesita revision?",
+                placeholder: "Ejemplo: laptop HP, PC gamer, celular Samsung",
+                options: ["Laptop", "PC", "Celular"]
+            },
+            {
+                key: "problem",
+                label: "Falla",
+                question: "Que falla presenta?",
+                placeholder: "Ejemplo: se apaga, esta lenta, no carga"
+            },
+            {
+                key: "urgency",
+                label: "Urgencia",
+                question: "Que tan urgente es?",
+                placeholder: "Ejemplo: hoy, esta semana, sin prisa",
+                options: ["Hoy", "Esta semana", "Sin prisa"]
+            },
+            {
+                key: "schedule",
+                label: "Horario",
+                question: "En que zona u horario te puedo contactar?",
+                placeholder: "Ejemplo: Toluca, despues de las 6 pm"
+            }
+        ];
+
+        const answers = {};
+        let currentStep = 0;
+
+        function buildSummary() {
+            return [
+                `Hola, soy ${answers.name || "cliente"}.`,
+                `Necesito soporte tecnico.`,
+                `Equipo: ${answers.device || "No especificado"}.`,
+                `Falla: ${answers.problem || "No especificada"}.`,
+                `Urgencia: ${answers.urgency || "No especificada"}.`,
+                `Zona u horario: ${answers.schedule || "No especificado"}.`
+            ].join("\n");
+        }
+
+        function updateForm() {
+            if (nameInput) {
+                nameInput.value = answers.name || "";
+            }
+
+            if (messageInput) {
+                messageInput.value = buildSummary();
+            }
+        }
+
+        function renderHistory() {
+            botAnswers.replaceChildren();
+
+            steps
+                .filter((step) => answers[step.key])
+                .forEach((step) => {
+                    const item = document.createElement("p");
+                    const label = document.createElement("strong");
+                    label.textContent = `${step.label}:`;
+                    item.append(label, ` ${answers[step.key]}`);
+                    botAnswers.appendChild(item);
+                });
+        }
+
+        function renderOptions(step) {
+            botOptions.innerHTML = "";
+
+            if (!step.options) {
+                return;
+            }
+
+            step.options.forEach((option) => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.textContent = option;
+                button.addEventListener("click", () => {
+                    botInput.value = option;
+                    saveAnswer();
+                });
+                botOptions.appendChild(button);
+            });
+        }
+
+        function renderStep() {
+            const isDone = currentStep >= steps.length;
+
+            if (isDone) {
+                botQuestion.textContent = "Listo. Revise el resumen y mandalo por WhatsApp.";
+                botInput.hidden = true;
+                botNext.textContent = "Enviar por WhatsApp";
+                botOptions.innerHTML = "";
+                updateForm();
+            } else {
+                const step = steps[currentStep];
+                botQuestion.textContent = step.question;
+                botInput.hidden = false;
+                botInput.value = answers[step.key] || "";
+                botInput.placeholder = step.placeholder;
+                botNext.textContent = "Responder";
+                renderOptions(step);
+            }
+
+            botBack.disabled = currentStep === 0;
+            renderHistory();
+            window.techRepairFitPanels?.();
+        }
+
+        function saveAnswer() {
+            if (currentStep >= steps.length) {
+                const text = buildSummary();
+                window.open(createWhatsappLink(text), "_blank", "noopener");
+                return;
+            }
+
+            const step = steps[currentStep];
+            const value = botInput.value.trim();
+
+            if (!value) {
+                botInput.focus();
+                return;
+            }
+
+            answers[step.key] = value;
+            currentStep += 1;
+            updateForm();
+            renderStep();
+        }
+
+        botNext.addEventListener("click", saveAnswer);
+        botInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                saveAnswer();
+            }
         });
-    });
+
+        botBack.addEventListener("click", () => {
+            currentStep = Math.max(0, currentStep - 1);
+            renderStep();
+        });
+
+        botReset.addEventListener("click", () => {
+            Object.keys(answers).forEach((key) => delete answers[key]);
+            currentStep = 0;
+            updateForm();
+            renderStep();
+        });
+
+        renderStep();
+    }
+
+    initSupportBot();
 }
 
-if (whatsappFloat) {
-    const defaultText = "Hola, necesito una revision tecnica para mi equipo.";
-    whatsappFloat.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultText)}`;
+if (chatToggle && chatWidget) {
+    function setChatOpen(isOpen) {
+        chatWidget.classList.toggle("is-open", isOpen);
+        chatWidget.setAttribute("aria-hidden", String(!isOpen));
+        chatToggle.setAttribute("aria-expanded", String(isOpen));
+
+        if (isOpen) {
+            window.setTimeout(() => botInput?.focus(), 120);
+        }
+    }
+
+    chatToggle.addEventListener("click", () => {
+        setChatOpen(!chatWidget.classList.contains("is-open"));
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && chatWidget.classList.contains("is-open")) {
+            setChatOpen(false);
+            chatToggle.focus();
+        }
+    });
 }
 
 startAutoplay();
@@ -131,6 +321,7 @@ function initPanelAnimation() {
 
     let currentIndex = -1;
     let animating = false;
+    let fitTimer;
 
     document.body.classList.add("gsap-panels");
     const initialHashIndex = sections.findIndex((section) => section.id && `#${section.id}` === window.location.hash);
@@ -149,6 +340,32 @@ function initPanelAnimation() {
         progressItems.forEach((item, itemIndex) => {
             item.classList.toggle("is-active", itemIndex === index);
         });
+    }
+
+    function fitPanelContent() {
+        innerWrappers.forEach((inner) => {
+            inner.style.zoom = "";
+            inner.style.width = "";
+            inner.style.height = "";
+
+            const availableWidth = window.innerWidth;
+            const availableHeight = window.innerHeight;
+            const requiredWidth = inner.scrollWidth;
+            const requiredHeight = inner.scrollHeight;
+            const widthScale = availableWidth / Math.max(requiredWidth, 1);
+            const heightScale = availableHeight / Math.max(requiredHeight, 1);
+            const scale = Math.min(1, widthScale, heightScale);
+
+            if (scale < 1) {
+                const correctedScale = Math.max(.68, scale - .02);
+                inner.style.zoom = correctedScale;
+            }
+        });
+    }
+
+    function schedulePanelFit() {
+        window.clearTimeout(fitTimer);
+        fitTimer = window.setTimeout(fitPanelContent, 120);
     }
 
     function gotoSection(index, direction) {
@@ -230,8 +447,12 @@ function initPanelAnimation() {
     });
 
     window.techRepairGoToSection = gotoSection;
+    window.techRepairFitPanels = fitPanelContent;
     currentIndex = initialIndex;
     setProgress(initialIndex);
+    fitPanelContent();
+    window.addEventListener("resize", schedulePanelFit);
+    window.addEventListener("orientationchange", schedulePanelFit);
 }
 
 window.addEventListener("load", initPanelAnimation);
