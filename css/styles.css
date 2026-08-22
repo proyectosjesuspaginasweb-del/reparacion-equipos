@@ -33,6 +33,7 @@ body {
 body.gsap-panels {
     height: 100vh;
     height: 100svh;
+    height: 100dvh;
     overflow: hidden;
 }
 
@@ -45,6 +46,37 @@ button,
 input,
 textarea {
     font: inherit;
+}
+
+.row,
+.container-fluid {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+.site-header a,
+.button,
+.floating-button,
+.icon-button,
+.dot,
+.assistant-options button,
+.bot-controls button,
+.bot-actions button {
+    text-decoration: none;
+}
+
+.button,
+.header-action,
+.floating-button,
+.icon-button,
+.dot,
+.assistant-options button,
+.bot-controls button,
+.bot-actions button,
+.contact-form input,
+.contact-form textarea,
+.bot-controls input {
+    border-radius: 0;
 }
 
 .site-header {
@@ -136,8 +168,12 @@ textarea {
 .panel-section {
     position: fixed;
     inset: 0;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
     min-height: 100vh;
     min-height: 100svh;
+    min-height: 100dvh;
     scroll-margin-top: 118px;
     overflow: hidden;
     visibility: hidden;
@@ -151,6 +187,7 @@ textarea {
 .inner {
     width: 100%;
     height: 100%;
+    height: 100dvh;
     overflow: hidden;
 }
 
@@ -167,6 +204,21 @@ textarea {
     gap: clamp(28px, 4vw, 88px);
     padding: clamp(30px, 5vw, 96px) clamp(18px, 4vw, 72px);
     padding-top: calc(74px + clamp(30px, 5vw, 96px));
+}
+
+.hero .inner.row,
+.contact .inner.row {
+    display: grid;
+}
+
+.hero-copy[class*="col-"],
+.slider-shell[class*="col-"],
+.contact .panel-copy[class*="col-"],
+.contact-stack[class*="col-"] {
+    flex: initial;
+    width: auto;
+    max-width: 100%;
+    padding: 0;
 }
 
 .bg {
@@ -601,16 +653,23 @@ body.gsap-panels .contact {
     border-top: 0;
 }
 
-.service-grid {
+.service-grid,
+.service-grid.row {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
     margin-top: 32px;
 }
 
+.service-grid article,
+.service-grid article[class*="col-"] {
+    width: auto;
+    max-width: none;
+    padding: 22px;
+}
+
 .service-grid article {
     min-height: 220px;
-    padding: 22px;
     border: 3px solid var(--line);
     background: rgba(255, 240, 199, .92);
     box-shadow: 6px 6px 0 var(--ink);
@@ -635,15 +694,22 @@ body.gsap-panels .contact {
     color: white;
 }
 
-.process-list {
+.process-list,
+.process-list.row {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
     margin-top: 30px;
 }
 
-.process-list div {
+.process-list div,
+.process-list div[class*="col-"] {
+    width: auto;
+    max-width: none;
     padding: 18px;
+}
+
+.process-list div {
     border: 3px solid var(--cream);
     background: rgba(255, 79, 184, .12);
     box-shadow: 6px 6px 0 rgba(255, 212, 71, .85);
@@ -1171,6 +1237,15 @@ body:not(.gsap-panels) main {
         max-width: 280px;
     }
 
+    .hero-copy[class*="col-"],
+    .slider-shell[class*="col-"],
+    .contact .panel-copy[class*="col-"],
+    .contact-stack[class*="col-"] {
+        width: min(280px, calc(100vw - 96px));
+        max-width: 280px;
+        padding: 0;
+    }
+
     .service-grid {
         gap: 10px;
     }
@@ -1643,6 +1718,15 @@ body:not(.gsap-panels) main {
         max-width: 280px;
     }
 
+    body.gsap-panels .contact-stack[class*="col-"],
+    body.gsap-panels .contact .panel-copy[class*="col-"],
+    body.gsap-panels .hero-copy[class*="col-"],
+    body.gsap-panels .slider-shell[class*="col-"] {
+        width: min(280px, calc(100vw - 96px));
+        max-width: 280px;
+        padding: 0;
+    }
+
     body.gsap-panels .virtual-assistant,
     body.gsap-panels .contact-form {
         gap: 6px;
@@ -1867,5 +1951,292 @@ body.gsap-panels .chat-widget {
         width: min(280px, calc(100vw - 24px));
         max-height: calc(100svh - 100px);
         padding: 9px;
+    }
+}
+
+/* Responsive hardening: keep Bootstrap helpers from compressing the Bauhaus panels. */
+@media (max-width: 980px) {
+    .hero .inner,
+    .services .inner,
+    .process .inner,
+    .contact .inner,
+    body.gsap-panels .hero .inner,
+    body.gsap-panels .services .inner,
+    body.gsap-panels .process .inner,
+    body.gsap-panels .contact .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 2.4vh, 24px);
+        padding-left: clamp(18px, 5vw, 44px);
+        padding-right: clamp(18px, 5vw, 44px);
+    }
+
+    .hero-copy[class*="col-"],
+    .slider-shell[class*="col-"],
+    .contact .panel-copy[class*="col-"],
+    .contact-stack[class*="col-"],
+    body.gsap-panels .hero-copy[class*="col-"],
+    body.gsap-panels .slider-shell[class*="col-"],
+    body.gsap-panels .contact .panel-copy[class*="col-"],
+    body.gsap-panels .contact-stack[class*="col-"] {
+        flex: 0 0 auto;
+        width: min(560px, calc(100vw - 72px));
+        max-width: min(560px, calc(100vw - 72px));
+        padding: 0;
+    }
+
+    .service-grid,
+    .service-grid.row,
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: min(560px, calc(100vw - 72px));
+        max-width: min(560px, calc(100vw - 72px));
+        gap: 12px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .service-grid article,
+    .service-grid article[class*="col-"],
+    .process-list div,
+    .process-list div[class*="col-"],
+    body.gsap-panels .service-grid article,
+    body.gsap-panels .service-grid article[class*="col-"],
+    body.gsap-panels .process-list div,
+    body.gsap-panels .process-list div[class*="col-"] {
+        width: 100%;
+        max-width: none;
+        min-height: 0;
+        box-sizing: border-box;
+    }
+
+    .process h2,
+    body.gsap-panels .process h2 {
+        max-width: min(620px, calc(100vw - 72px));
+        text-align: center;
+    }
+
+    .process-list div,
+    body.gsap-panels .process-list div {
+        padding: 14px 18px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 560px) {
+    .site-header {
+        min-height: 118px;
+    }
+
+    .hero .inner,
+    .services .inner,
+    .process .inner,
+    .contact .inner,
+    body.gsap-panels .hero .inner,
+    body.gsap-panels .services .inner,
+    body.gsap-panels .process .inner,
+    body.gsap-panels .contact .inner {
+        justify-content: center;
+        height: 100dvh;
+        min-height: 100dvh;
+        gap: 10px;
+        padding-top: 118px;
+        padding-bottom: 66px;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hero-copy[class*="col-"],
+    .slider-shell[class*="col-"],
+    .contact .panel-copy[class*="col-"],
+    .contact-stack[class*="col-"],
+    .service-grid,
+    .service-grid.row,
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .hero-copy[class*="col-"],
+    body.gsap-panels .slider-shell[class*="col-"],
+    body.gsap-panels .contact .panel-copy[class*="col-"],
+    body.gsap-panels .contact-stack[class*="col-"],
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: min(292px, calc(100vw - 76px));
+        max-width: min(292px, calc(100vw - 76px));
+    }
+
+    .hero h1,
+    .services h2,
+    .process h2,
+    .contact h2,
+    body.gsap-panels .hero h1,
+    body.gsap-panels .services h2,
+    body.gsap-panels .process h2,
+    body.gsap-panels .contact h2 {
+        max-width: min(292px, calc(100vw - 76px));
+        line-height: .96;
+        text-align: center;
+    }
+
+    .process h2,
+    body.gsap-panels .process h2 {
+        max-width: min(260px, calc(100vw - 108px));
+        font-size: clamp(1.62rem, 7.6vw, 2.12rem);
+    }
+
+    .process .inner,
+    body.gsap-panels .process .inner {
+        justify-content: flex-start;
+        padding-top: 230px;
+    }
+
+    .contact .panel-copy[class*="col-"],
+    .contact-stack[class*="col-"],
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .contact .panel-copy[class*="col-"],
+    body.gsap-panels .contact-stack[class*="col-"],
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: min(236px, calc(100vw - 132px));
+        max-width: min(236px, calc(100vw - 132px));
+    }
+
+    .contact h2,
+    body.gsap-panels .contact h2 {
+        max-width: min(260px, calc(100vw - 108px));
+    }
+
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        gap: 8px;
+        margin-top: 6px;
+    }
+
+    .process-list div,
+    .process-list div[class*="col-"],
+    body.gsap-panels .process-list div,
+    body.gsap-panels .process-list div[class*="col-"] {
+        padding: 10px 12px;
+        font-size: .78rem;
+        line-height: 1.25;
+        text-align: left;
+        box-shadow: 4px 4px 0 rgba(255, 212, 71, .85);
+    }
+
+    .service-grid article,
+    .service-grid article[class*="col-"],
+    body.gsap-panels .service-grid article,
+    body.gsap-panels .service-grid article[class*="col-"] {
+        padding: 12px;
+    }
+
+    .contact-form,
+    body.gsap-panels .contact-form {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 560px) and (max-height: 780px) {
+    .hero .inner,
+    .services .inner,
+    .process .inner,
+    .contact .inner,
+    body.gsap-panels .hero .inner,
+    body.gsap-panels .services .inner,
+    body.gsap-panels .process .inner,
+    body.gsap-panels .contact .inner {
+        justify-content: center;
+        height: 100dvh;
+        min-height: 100dvh;
+        padding-top: 118px;
+        padding-bottom: 66px;
+        gap: 8px;
+    }
+
+    .hero-copy[class*="col-"],
+    .slider-shell[class*="col-"],
+    .contact .panel-copy[class*="col-"],
+    .contact-stack[class*="col-"],
+    .service-grid,
+    .service-grid.row,
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .hero-copy[class*="col-"],
+    body.gsap-panels .slider-shell[class*="col-"],
+    body.gsap-panels .contact .panel-copy[class*="col-"],
+    body.gsap-panels .contact-stack[class*="col-"],
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: min(276px, calc(100vw - 82px));
+        max-width: min(276px, calc(100vw - 82px));
+    }
+
+    .process h2,
+    body.gsap-panels .process h2 {
+        max-width: min(248px, calc(100vw - 116px));
+        font-size: clamp(1.42rem, 7vw, 1.88rem);
+    }
+
+    .process .inner,
+    body.gsap-panels .process .inner {
+        justify-content: flex-start;
+        padding-top: 214px;
+    }
+
+    .contact .panel-copy[class*="col-"],
+    .contact-stack[class*="col-"],
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .contact .panel-copy[class*="col-"],
+    body.gsap-panels .contact-stack[class*="col-"],
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: min(224px, calc(100vw - 144px));
+        max-width: min(224px, calc(100vw - 144px));
+    }
+
+    .process-list div,
+    .process-list div[class*="col-"],
+    body.gsap-panels .process-list div,
+    body.gsap-panels .process-list div[class*="col-"] {
+        padding: 8px 10px;
+        font-size: .7rem;
+    }
+}
+
+@media (max-width: 560px) and (min-height: 781px) {
+    .hero .inner,
+    .services .inner,
+    .process .inner,
+    .contact .inner,
+    body.gsap-panels .hero .inner,
+    body.gsap-panels .services .inner,
+    body.gsap-panels .process .inner,
+    body.gsap-panels .contact .inner {
+        justify-content: center;
+        height: 100dvh;
+        min-height: 100dvh;
+        padding-top: 118px;
+        padding-bottom: 66px;
+    }
+
+    .process .inner,
+    body.gsap-panels .process .inner {
+        justify-content: flex-start;
+        padding-top: 230px;
     }
 }

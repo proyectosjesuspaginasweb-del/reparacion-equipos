@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -30,8 +31,8 @@
         <section class="panel-section hero" aria-labelledby="hero-title">
             <div class="bg bg-paper" aria-hidden="true"></div>
             <div class="outer">
-                <div class="inner">
-            <div class="hero-copy panel-copy">
+                <div class="inner row g-3 g-lg-5 align-items-center">
+            <div class="hero-copy panel-copy col-12 col-lg-6">
                 <p class="eyebrow">Soporte tecnico urgente</p>
                 <h1 class="section-heading" id="hero-title">Tu equipo vuelve a la accion.</h1>
                 <p class="hero-text">Diagnostico claro para computadoras, laptops y celulares. Sin vueltas: revisamos la falla, explicamos el riesgo y te decimos cuanto cuesta antes de reparar.</p>
@@ -41,7 +42,7 @@
                 </div>
             </div>
 
-            <section class="slider-shell" aria-label="Servicios destacados">
+            <section class="slider-shell col-12 col-lg-6" aria-label="Servicios destacados">
                 <div class="slider-toolbar">
                     <span>Modo reparacion</span>
                     <div class="slider-controls">
@@ -107,23 +108,23 @@
         <section class="panel-section services" id="servicios" aria-labelledby="services-title">
             <div class="bg bg-yellow" aria-hidden="true"></div>
             <div class="outer">
-                <div class="inner">
-            <div class="panel-copy">
+                <div class="inner container-fluid">
+            <div class="panel-copy mx-auto">
                 <p class="eyebrow">Servicios clave</p>
                 <h2 class="section-heading" id="services-title">Fallos tecnicos bajo control.</h2>
             </div>
-            <div class="service-grid">
-                <article>
+            <div class="service-grid row g-3 g-xl-4">
+                <article class="col-12 col-md-4">
                     <span class="service-number">01</span>
                     <h3>Laptops y PC</h3>
                     <p>Equipos lentos, calentamiento, instalacion de sistema, memoria, disco y limpieza.</p>
                 </article>
-                <article>
+                <article class="col-12 col-md-4">
                     <span class="service-number">02</span>
                     <h3>Celulares</h3>
                     <p>Fallas de carga, respaldo, configuracion, actualizaciones y problemas de software.</p>
                 </article>
-                <article>
+                <article class="col-12 col-md-4">
                     <span class="service-number">03</span>
                     <h3>Asesoria</h3>
                     <p>Compra de equipo, mejora de componentes, seguridad basica y uso correcto.</p>
@@ -136,13 +137,13 @@
         <section class="panel-section process" id="proceso" aria-labelledby="process-title">
             <div class="bg bg-ink" aria-hidden="true"></div>
             <div class="outer">
-                <div class="inner">
+                <div class="inner container-fluid">
             <p class="eyebrow">Proceso</p>
             <h2 class="section-heading" id="process-title">Primero cazamos la falla, luego reparamos.</h2>
-            <div class="process-list">
-                <div><strong>1.</strong> Recibimos sintomas y datos del equipo.</div>
-                <div><strong>2.</strong> Revisamos causa probable y riesgos.</div>
-                <div><strong>3.</strong> Confirmas costo antes del servicio.</div>
+            <div class="process-list row g-3">
+                <div class="col-12 col-md-4"><strong>1.</strong> Recibimos sintomas y datos del equipo.</div>
+                <div class="col-12 col-md-4"><strong>2.</strong> Revisamos causa probable y riesgos.</div>
+                <div class="col-12 col-md-4"><strong>3.</strong> Confirmas costo antes del servicio.</div>
             </div>
                 </div>
             </div>
@@ -151,13 +152,13 @@
         <section class="panel-section contact" id="contacto" aria-labelledby="contact-title">
             <div class="bg bg-blue" aria-hidden="true"></div>
             <div class="outer">
-                <div class="inner">
-            <div class="panel-copy">
+                <div class="inner row g-3 g-lg-5 align-items-center">
+            <div class="panel-copy col-12 col-lg-6">
                 <p class="eyebrow">Contacto directo</p>
                 <h2 class="section-heading" id="contact-title">WhatsApp.</h2>
                 <p>Describe tu equipo y falla. Te respondemos por WhatsApp.</p>
             </div>
-            <div class="contact-stack">
+            <div class="contact-stack col-12 col-lg-6">
                 <form class="contact-form">
                     <label>Nombre<input type="text" name="name" placeholder="Tu nombre"></label>
                     <label>Equipo y falla<textarea name="message" rows="4" placeholder="Ejemplo: laptop HP se apaga despues de 10 minutos"></textarea></label>
@@ -203,6 +204,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

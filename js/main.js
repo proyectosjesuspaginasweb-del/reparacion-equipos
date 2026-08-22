@@ -343,6 +343,15 @@ function initPanelAnimation() {
     }
 
     function fitPanelContent() {
+        if (window.matchMedia("(max-width: 980px)").matches) {
+            innerWrappers.forEach((inner) => {
+                inner.style.zoom = "";
+                inner.style.width = "";
+                inner.style.height = "";
+            });
+            return;
+        }
+
         innerWrappers.forEach((inner) => {
             inner.style.zoom = "";
             inner.style.width = "";
@@ -352,12 +361,12 @@ function initPanelAnimation() {
             const availableHeight = window.innerHeight;
             const requiredWidth = inner.scrollWidth;
             const requiredHeight = inner.scrollHeight;
-            const widthScale = availableWidth / Math.max(requiredWidth, 1);
-            const heightScale = availableHeight / Math.max(requiredHeight, 1);
+            const widthScale = availableWidth / Math.max(requiredWidth + 8, 1);
+            const heightScale = availableHeight / Math.max(requiredHeight + 8, 1);
             const scale = Math.min(1, widthScale, heightScale);
 
-            if (scale < 1) {
-                const correctedScale = Math.max(.68, scale - .02);
+            if (scale < .97) {
+                const correctedScale = Math.max(.82, scale);
                 inner.style.zoom = correctedScale;
             }
         });
