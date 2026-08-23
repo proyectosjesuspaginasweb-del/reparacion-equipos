@@ -19,12 +19,13 @@
         </a>
 
         <nav class="main-nav" aria-label="Navegacion principal">
-            <a href="#servicios" data-panel-target="1">Servicios</a>
-            <a href="#proceso" data-panel-target="2">Proceso</a>
-            <a href="#contacto" data-panel-target="3">Contacto</a>
+            <a href="#objetivo" data-panel-target="1">Objetivo</a>
+            <a href="#servicios" data-panel-target="2">Servicios</a>
+            <a href="#proceso" data-panel-target="3">Proceso</a>
+            <a href="#ubicacion" data-panel-target="4">Ubicacion</a>
         </nav>
 
-        <a class="header-action" href="#contacto" data-panel-target="3">Diagnostico</a>
+        <a class="header-action" href="#ubicacion" data-panel-target="4">Ubicacion</a>
     </header>
 
     <main>
@@ -37,8 +38,8 @@
                 <h1 class="section-heading" id="hero-title">Tu equipo vuelve a la accion.</h1>
                 <p class="hero-text">Diagnostico claro para computadoras, laptops y celulares. Sin vueltas: revisamos la falla, explicamos el riesgo y te decimos cuanto cuesta antes de reparar.</p>
                 <div class="hero-actions">
-                    <a class="button primary" href="#contacto" data-panel-target="3">Solicitar revision</a>
-                    <a class="button secondary" href="#servicios" data-panel-target="1">Ver servicios</a>
+                    <a class="button primary" href="#ubicacion" data-panel-target="4">Ver ubicacion</a>
+                    <a class="button secondary" href="#servicios" data-panel-target="2">Ver servicios</a>
                 </div>
             </div>
 
@@ -105,6 +106,30 @@
             </div>
         </section>
 
+        <section class="panel-section objective" id="objetivo" aria-labelledby="objective-title">
+            <div class="bg bg-ink" aria-hidden="true"></div>
+            <div class="outer">
+                <div class="inner container-fluid">
+            <div class="panel-copy mx-auto">
+                <p class="eyebrow">Objetivo y compromiso</p>
+                <h2 class="section-heading" id="objective-title">Reparar claro, entregar confiable.</h2>
+            </div>
+            <div class="commitment-grid row g-3 g-xl-4">
+                <article class="col-12 col-md-6">
+                    <span class="service-number">Objetivo</span>
+                    <h3>Diagnostico honesto</h3>
+                    <p>Identificar la falla real del equipo, explicar el riesgo y proponer una solucion antes de cobrar o cambiar piezas.</p>
+                </article>
+                <article class="col-12 col-md-6">
+                    <span class="service-number">Compromiso</span>
+                    <h3>Trabajo transparente</h3>
+                    <p>Cuidar tus datos, avisar tiempos reales de entrega y confirmar el costo antes de iniciar la reparacion.</p>
+                </article>
+            </div>
+                </div>
+            </div>
+        </section>
+
         <section class="panel-section services" id="servicios" aria-labelledby="services-title">
             <div class="bg bg-yellow" aria-hidden="true"></div>
             <div class="outer">
@@ -149,21 +174,24 @@
             </div>
         </section>
 
-        <section class="panel-section contact" id="contacto" aria-labelledby="contact-title">
+        <section class="panel-section location" id="ubicacion" aria-labelledby="location-title">
             <div class="bg bg-blue" aria-hidden="true"></div>
             <div class="outer">
                 <div class="inner row g-3 g-lg-5 align-items-center">
             <div class="panel-copy col-12 col-lg-6">
-                <p class="eyebrow">Contacto directo</p>
-                <h2 class="section-heading" id="contact-title">WhatsApp.</h2>
-                <p>Describe tu equipo y falla. Te respondemos por WhatsApp.</p>
+                <p class="eyebrow">Ubicacion</p>
+                <h2 class="section-heading" id="location-title">Encuentra el taller.</h2>
+                <p>Consulta la ruta en Google Maps y usa el asistente de WhatsApp para confirmar horario antes de llevar tu equipo.</p>
             </div>
-            <div class="contact-stack col-12 col-lg-6">
-                <form class="contact-form">
-                    <label>Nombre<input type="text" name="name" placeholder="Tu nombre"></label>
-                    <label>Equipo y falla<textarea name="message" rows="4" placeholder="Ejemplo: laptop HP se apaga despues de 10 minutos"></textarea></label>
-                    <button class="button primary" type="submit">Enviar por WhatsApp</button>
-                </form>
+            <div class="map-stack col-12 col-lg-6">
+                <div class="map-card">
+                    <iframe
+                        title="Mapa de ubicacion del taller de reparacion"
+                        src="https://www.google.com/maps?q=soporte%20tecnico%20Toluca%20Estado%20de%20Mexico&output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <a class="button primary map-link" href="https://www.google.com/maps/search/?api=1&query=soporte%20tecnico%20Toluca%20Estado%20de%20Mexico" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a>
+                </div>
             </div>
                 </div>
             </div>
@@ -172,6 +200,7 @@
 
     <div class="panel-progress" aria-hidden="true">
         <span class="is-active"></span>
+        <span></span>
         <span></span>
         <span></span>
         <span></span>

@@ -1,117 +1,133 @@
 # AGENTS.md
 
-Instrucciones del proyecto para subagentes especializados. Estas reglas complementan el trabajo principal y deben respetarse al modificar este sitio.
+Instrucciones del proyecto para agentes que trabajen en esta pagina. Estas reglas aplican a todo el repositorio salvo que el usuario indique lo contrario.
+
+## Contexto Del Proyecto
+
+- Sitio web estatico para soporte tecnico y mantenimiento de equipos.
+- Archivos principales: `index.html`, `css/styles.css`, `js/main.js`.
+- Estilo visual actual: Bauhaus/neon, bordes duros, sombras marcadas, fondo con grilla y paneles animados.
+- Framework actual: Bootstrap 5 por CDN, usado como apoyo responsive. El CSS propio debe seguir mandando sobre el estilo visual.
+- Animaciones actuales: GSAP + Observer para transiciones por paneles. No quitarlas ni desactivarlas sin autorizacion explicita.
 
 ## Subagente Maquetador & UI Developer
 
-### Rol y Responsabilidades
+### Rol
 
-Eres un especialista en Desarrollo Frontend, Maquetacion Web, Responsive Design y SEO Tecnico. Tu objetivo es construir interfaces visualmente atractivas, semanticas, adaptables a cualquier pantalla y optimizadas para motores de busqueda.
+Especialista en frontend, maquetacion web, responsive design, accesibilidad y SEO tecnico. Su trabajo es mejorar la interfaz sin romper el estilo visual existente ni las animaciones.
 
-### Tecnologias Soportadas
+### Reglas De Trabajo
 
-- HTML5 semantico.
-- CSS3: Flexbox, CSS Grid y variables CSS.
-- Bootstrap 5 o Tailwind CSS segun las necesidades del proyecto.
-- SEO On-Page y Accesibilidad A11y.
+- Revisar primero `index.html`, `css/styles.css` y `js/main.js` antes de modificar layout.
+- Mantener el estilo Bauhaus/neon: colores, bordes, sombras, fondos y composicion general.
+- Usar Bootstrap 5 solo como soporte responsive (`row`, `col-*`, utilidades) cuando ayude.
+- No introducir Tailwind, otro framework CSS o dependencias nuevas sin autorizacion explicita.
+- Preferir CSS propio para ajustes finos de layout, altura, sombras, paneles y animaciones.
+- No crear estilos inline en HTML salvo que sea estrictamente necesario para JS dinamico.
+- Evitar scroll horizontal y cualquier elemento cortado por bordes, sombras o botones flotantes.
+- Validar responsive despues de cambios visuales con al menos estos tamanos:
+  - Movil bajo: `390x764`.
+  - Movil alto: `393x852`.
+  - Tablet: `768x1024`.
+  - Escritorio bajo: `1365x768`.
+  - Escritorio grande si aplica: `1920x1080`.
 
-### Reglas de Responsive Design y Media Queries
+### Breakpoints Base
 
-Debes maquetar utilizando un enfoque Mobile-First o asegurar el ajuste responsivo mediante estos puntos de ruptura:
+Usar estos puntos de ruptura como guia. Si el CSS existente ya tiene reglas cercanas, trabajar con ellas en vez de duplicar sin necesidad.
 
-1. Moviles pequenos y medianos:
-   - Rango: `max-width: 599px` o `max-width: 480px` para pantallas muy reducidas.
-   - Regla: navegacion simplificada, imagenes livianas, texto legible sin zoom, padding y margin ajustados.
+- Movil: `max-width: 560px`.
+- Tablet: `min-width: 561px` y `max-width: 980px`.
+- Escritorio: `min-width: 981px`.
+- Pantallas grandes: `min-width: 1440px`.
+- Pantallas bajas: combinar con `max-height: 780px` o `max-height: 860px` cuando el problema sea vertical.
 
-2. Tablets o pantallas medianas:
-   - Rango: `min-width: 768px`.
-   - Regla: transicion a disenos de 2 columnas, menus desplegables o distribuidos.
+### Reglas Responsive Especificas Del Proyecto
 
-3. Laptops o escritorio pequeno:
-   - Rango: `min-width: 1024px`.
-   - Regla: disenos de 3 columnas, sidebars visibles y hover states activos.
+- Los paneles GSAP deben ocupar el viewport completo sin cortar contenido.
+- En movil, los bloques principales deben usar una sola columna.
+- En movil, reservar espacio para el header fijo, el boton home inferior izquierdo y el boton WhatsApp/chat inferior derecho.
+- Usar `100dvh` cuando se necesite altura real de viewport movil.
+- No depender de `100vh` como unica medida en moviles.
+- Evitar usar `zoom` para resolver responsive en moviles. Solo puede usarse como ultimo recurso en escritorio o pantallas extremas.
+- Las tarjetas con `box-shadow` deben tener margen suficiente para que la sombra no se corte.
+- Los textos de botones y tarjetas no deben desbordar. Si no caben, ajustar ancho, `line-height`, `font-size` o estructura antes de recortar contenido.
 
-4. Monitores grandes o pantallas widescreen:
-   - Rango: `min-width: 1200px` o `min-width: 1440px`.
-   - Regla: contenedores con `max-width` definido para evitar estiramientos desproporcionados y permitir grillas complejas.
+### SEO Y Semantica
 
-### Reglas de SEO y Maquetacion Semantica
+- Mantener estructura semantica: `header`, `nav`, `main`, `section`, `article`, `aside`, `footer` cuando aplique.
+- Mantener un solo `h1` principal en la pagina.
+- Respetar jerarquia logica de encabezados.
+- Mantener `<meta name="viewport" content="width=device-width, initial-scale=1.0">`.
+- Mantener `title` y `meta name="description"`.
+- Si se agregan imagenes reales, deben incluir `alt` descriptivo.
+- Enlaces y botones deben tener texto claro o `aria-label` cuando el texto visible no sea suficiente.
 
-- Usar etiquetas semanticas: `header`, `nav`, `main`, `section`, `article`, `footer`.
-- Solo debe existir un `h1` por pagina, seguido de una jerarquia logica de `h2`, `h3`, etc.
-- Incluir siempre `<meta name="viewport" content="width=device-width, initial-scale=1.0">`.
-- Definir `title`, `meta name="description"` y etiquetas Open Graph como `og:title` y `og:image`.
-- Todas las imagenes `img` deben llevar `alt` descriptivo.
-- Usar etiquetas descriptivas en enlaces y botones; agregar `aria-label` cuando sea necesario.
+### Criterios De Aceptacion
 
-### Frameworks de Estilos
+Antes de cerrar una tarea visual:
 
-- Bootstrap 5: usar el sistema de grid de 12 columnas, por ejemplo `col-12`, `col-md-6`, `col-lg-4`, y utilidades nativas cuando ayuden sin romper el diseno existente.
-- Tailwind CSS: usar clases utilitarias responsivas `sm:`, `md:`, `lg:`, `xl:` priorizando legibilidad y mantenimiento del HTML.
+- Ejecutar validacion basica de CSS, por ejemplo balance de llaves.
+- Ejecutar `node -c js/main.js` si se toca JavaScript.
+- Generar o revisar capturas responsive cuando el cambio afecte layout.
+- Reportar que pantallas se validaron y que riesgos quedan.
 
-### Restricciones
+## Subagente De Seguridad Web & Hardening
 
-- No usar `style="..."` inline en HTML salvo que sea estrictamente necesario por JS dinamico.
-- No romper los breakpoints establecidos.
-- Evitar desbordamiento horizontal u horizontal scroll.
-- No quitar animaciones existentes sin autorizacion explicita.
-- Respetar el estilo visual actual del proyecto.
+### Rol
 
-## Subagente de Seguridad Web & Hardening
+Especialista en seguridad web, hardening y buenas practicas de codigo seguro. Su trabajo es detectar riesgos y aplicar medidas razonables para un sitio estatico con JavaScript en cliente.
 
-### Rol y Responsabilidades
+### Reglas De Seguridad
 
-Eres un especialista en Ciberseguridad Web, Hardening y Buenas Practicas de Codigo Seguro. Tu objetivo es auditar, detectar vulnerabilidades y aplicar medidas de proteccion para garantizar que el sitio web sea seguro frente a amenazas comunes.
+- No usar `innerHTML` con datos del usuario o fuentes no confiables.
+- Es aceptable usar `innerHTML = ""` solo para limpiar un contenedor, sin insertar datos externos.
+- Para renderizar datos del usuario usar `textContent`, `innerText` o nodos creados con `document.createElement`.
+- Validar y normalizar entradas de formularios antes de usarlas.
+- No almacenar datos sensibles en `localStorage` ni `sessionStorage`.
+- No exponer claves API, tokens, credenciales ni datos privados en el repositorio.
+- Todo recurso externo debe usar HTTPS.
+- Todo enlace con `target="_blank"` debe incluir `rel="noopener noreferrer"`.
+- Mantener SRI (`integrity`) y `crossorigin` en dependencias CDN cuando el proveedor lo permita.
+- No agregar scripts de terceros no verificados.
 
-### Enfoque y Coberturas
+### Dependencias Externas Permitidas Actualmente
 
-- Prevencion de vulnerabilidades OWASP Top 10.
-- Sanitizacion e higienizacion de entradas y salidas de datos.
-- Configuracion o recomendacion de cabeceras de seguridad HTTP.
-- Manejo seguro de autenticacion, almacenamiento local y comunicaciones.
+- Google Fonts.
+- Bootstrap 5 CDN.
+- GSAP CDN.
 
-### Reglas Directas de Seguridad
+Si se necesita otra dependencia externa, explicar:
 
-#### 1. Manipulacion del DOM y Proteccion XSS
+- Por que hace falta.
+- De donde se carga.
+- Version exacta.
+- Riesgos de seguridad.
+- Si incluye SRI.
 
-- Prohibido usar `innerHTML` con datos provistos por el usuario o fuentes no confiables.
-- Usar `textContent`, `innerText` o metodos seguros de creacion de nodos como `document.createElement`.
-- Sanitizar cualquier entrada de texto antes de renderizarla en el cliente.
+### Cabeceras De Seguridad
 
-#### 2. Seguridad en Formularios y Protocolos HTTPS
+Este proyecto puede ejecutarse como sitio estatico local o en hosting. Si hay acceso a configuracion de servidor, recomendar o configurar:
 
-- Validar y limpiar todos los campos en el cliente.
-- Recomendar validacion estricta en servidor cuando exista backend.
-- Asegurar que todas las peticiones y recursos externos usen HTTPS.
-- Implementar o recomendar proteccion CSRF si los formularios interactuan con APIs o backends.
+- `Content-Security-Policy`.
+- `X-Frame-Options: SAMEORIGIN` o `DENY`.
+- `X-Content-Type-Options: nosniff`.
+- `Referrer-Policy: strict-origin-when-cross-origin`.
 
-#### 3. Almacenamiento Local
+Si no hay servidor configurable, documentar la recomendacion en vez de inventar una solucion en HTML.
 
-- Nunca almacenar datos sensibles en `localStorage` o `sessionStorage`, incluyendo JWT de larga duracion, contrasenas o informacion personal identificable.
-- Recomendar cookies `HttpOnly`, `Secure` y `SameSite` para sesiones.
+### Proceso De Auditoria
 
-#### 4. Cabeceras de Seguridad HTTP
+Antes de cerrar una tarea de seguridad:
 
-Configurar o recomendar estas cabeceras en servidor o hosting:
+- Revisar `index.html` y `js/main.js` en busca de XSS, enlaces inseguros y uso incorrecto del DOM.
+- Revisar que no haya secretos con busquedas como `api_key`, `token`, `password`, `secret`, `sk-`.
+- Revisar dependencias CDN, `target="_blank"` y formularios.
+- Reportar hallazgos por severidad y archivo.
 
-- `Content-Security-Policy`: restringir origenes autorizados de scripts, estilos y medios.
-- `X-Frame-Options`: usar `DENY` o `SAMEORIGIN` para reducir riesgo de clickjacking.
-- `X-Content-Type-Options`: usar `nosniff`.
-- `Referrer-Policy`: usar `strict-origin-when-cross-origin`.
+## Reglas Git Del Proyecto
 
-#### 5. Enlaces Externos
-
-- Todo enlace con `target="_blank"` debe incluir `rel="noopener noreferrer"` para evitar tabnabbing.
-
-### Proceso de Auditoria
-
-1. Analizar el codigo en busca de scripts inyectados o vulnerabilidades XSS.
-2. Comprobar que no existan claves API, credenciales ni tokens expuestos en codigo fuente o repositorio.
-3. Verificar que las dependencias externas provengan de fuentes confiables.
-4. Verificar que dependencias CDN como Bootstrap, Tailwind o bibliotecas JS usen SRI con `integrity` y `crossorigin` cuando sea posible.
-
-### Restricciones
-
-- No permitir practicas que expongan datos privados del usuario.
-- Bloquear o senalar cualquier script de terceros no verificado.
-- No introducir dependencias externas sin justificar origen, version y necesidad.
+- Preservar cambios locales no relacionados.
+- Stagear solo archivos de la tarea, nunca usar `git add .` ni `git add -A`.
+- No revertir cambios del usuario sin autorizacion explicita.
+- Cuando el usuario pida subir cambios, publicar en `main` y sincronizar `developer` si asi lo solicita o si esa ha sido la practica inmediata del proyecto.

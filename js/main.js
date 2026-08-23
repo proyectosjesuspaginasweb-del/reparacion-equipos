@@ -17,6 +17,10 @@ const whatsappNumber = "527227729418";
 let activeIndex = 0;
 let autoplayId;
 
+function createWhatsappLink(text) {
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+}
+
 function showSlide(index) {
     activeIndex = (index + slides.length) % slides.length;
 
@@ -54,9 +58,6 @@ dots.forEach((dot) => {
 });
 
 if (contactForm) {
-    const nameInput = contactForm.querySelector('input[name="name"]');
-    const messageInput = contactForm.querySelector('textarea[name="message"]');
-
     contactForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -67,74 +68,73 @@ if (contactForm) {
 
         window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
     });
+}
 
-    function createWhatsappLink(text) {
-        return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+function initSupportBot() {
+    if (!botQuestion || !botAnswers || !botInput || !botNext || !botBack || !botReset || !botOptions) {
+        return;
     }
 
-    function initSupportBot() {
-        if (!botQuestion || !botAnswers || !botInput || !botNext || !botBack || !botReset || !botOptions) {
-            return;
+    const steps = [
+        {
+            key: "name",
+            label: "Nombre",
+            question: "Primero dime tu nombre.",
+            placeholder: "Ejemplo: Jesus"
+        },
+        {
+            key: "device",
+            label: "Equipo",
+            question: "Que equipo necesita revision?",
+            placeholder: "Ejemplo: laptop HP, PC gamer, celular Samsung",
+            options: ["Laptop", "PC", "Celular"]
+        },
+        {
+            key: "problem",
+            label: "Falla",
+            question: "Que falla presenta?",
+            placeholder: "Ejemplo: se apaga, esta lenta, no carga"
+        },
+        {
+            key: "urgency",
+            label: "Urgencia",
+            question: "Que tan urgente es?",
+            placeholder: "Ejemplo: hoy, esta semana, sin prisa",
+            options: ["Hoy", "Esta semana", "Sin prisa"]
+        },
+        {
+            key: "schedule",
+            label: "Horario",
+            question: "En que zona u horario te puedo contactar?",
+            placeholder: "Ejemplo: Toluca, despues de las 6 pm"
+        }
+    ];
+
+    const answers = {};
+    let currentStep = 0;
+
+    function buildSummary() {
+        return [
+            `Hola, soy ${answers.name || "cliente"}.`,
+            `Necesito soporte tecnico.`,
+            `Equipo: ${answers.device || "No especificado"}.`,
+            `Falla: ${answers.problem || "No especificada"}.`,
+            `Urgencia: ${answers.urgency || "No especificada"}.`,
+            `Zona u horario: ${answers.schedule || "No especificado"}.`
+        ].join("\n");
+    }
+
+    function updateForm() {
+        const nameInput = contactForm?.querySelector('input[name="name"]');
+        const messageInput = contactForm?.querySelector('textarea[name="message"]');
+        if (nameInput) {
+            nameInput.value = answers.name || "";
         }
 
-        const steps = [
-            {
-                key: "name",
-                label: "Nombre",
-                question: "Primero dime tu nombre.",
-                placeholder: "Ejemplo: Jesus"
-            },
-            {
-                key: "device",
-                label: "Equipo",
-                question: "Que equipo necesita revision?",
-                placeholder: "Ejemplo: laptop HP, PC gamer, celular Samsung",
-                options: ["Laptop", "PC", "Celular"]
-            },
-            {
-                key: "problem",
-                label: "Falla",
-                question: "Que falla presenta?",
-                placeholder: "Ejemplo: se apaga, esta lenta, no carga"
-            },
-            {
-                key: "urgency",
-                label: "Urgencia",
-                question: "Que tan urgente es?",
-                placeholder: "Ejemplo: hoy, esta semana, sin prisa",
-                options: ["Hoy", "Esta semana", "Sin prisa"]
-            },
-            {
-                key: "schedule",
-                label: "Horario",
-                question: "En que zona u horario te puedo contactar?",
-                placeholder: "Ejemplo: Toluca, despues de las 6 pm"
-            }
-        ];
-
-        const answers = {};
-        let currentStep = 0;
-
-        function buildSummary() {
-            return [
-                `Hola, soy ${answers.name || "cliente"}.`,
-                `Necesito soporte tecnico.`,
-                `Equipo: ${answers.device || "No especificado"}.`,
-                `Falla: ${answers.problem || "No especificada"}.`,
-                `Urgencia: ${answers.urgency || "No especificada"}.`,
-                `Zona u horario: ${answers.schedule || "No especificado"}.`
-            ].join("\n");
+        if (messageInput) {
+            messageInput.value = buildSummary();
         }
-
-        function updateForm() {
-            if (nameInput) {
-                nameInput.value = answers.name || "";
-            }
-
-            if (messageInput) {
-                messageInput.value = buildSummary();
-            }
-        }
+    }
 
         function renderHistory() {
             botAnswers.replaceChildren();
@@ -235,10 +235,9 @@ if (contactForm) {
         });
 
         renderStep();
-    }
-
-    initSupportBot();
 }
+
+initSupportBot();
 
 if (chatToggle && chatWidget) {
     function setChatOpen(isOpen) {
@@ -266,6 +265,11 @@ if (chatToggle && chatWidget) {
 startAutoplay();
 
 function splitHeading(heading) {
+    if (heading.id === "hero-title") {
+        heading.dataset.scrambleText = heading.textContent.trim();
+        return [heading];
+    }
+
     const words = heading.textContent.trim().split(/\s+/);
     heading.textContent = "";
 
@@ -290,6 +294,51 @@ function splitHeading(heading) {
 
         heading.setAttribute("aria-label", words.join(" "));
         return chars;
+    });
+}
+
+function scrambleHeroHeading() {
+    const heading = document.querySelector("#hero-title");
+
+    if (!heading || !window.gsap) {
+        return;
+    }
+
+    const finalText = heading.dataset.scrambleText || heading.textContent.trim();
+    const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const state = { progress: 0 };
+
+    gsap.killTweensOf(state);
+
+    gsap.to(state, {
+        progress: 1,
+        duration: 2.4,
+        ease: "power2.inOut",
+        overwrite: "auto",
+        onStart: () => {
+            heading.textContent = finalText
+                .split("")
+                .map((char) => char === " " ? " " : scrambleChars[Math.floor(Math.random() * scrambleChars.length)])
+                .join("");
+        },
+        onUpdate: () => {
+            const revealCount = Math.floor(finalText.length * state.progress);
+            const scrambled = finalText
+                .split("")
+                .map((char, index) => {
+                    if (char === " " || index < revealCount) {
+                        return char;
+                    }
+
+                    return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                })
+                .join("");
+
+            heading.textContent = scrambled;
+        },
+        onComplete: () => {
+            heading.textContent = finalText;
+        }
     });
 }
 
@@ -428,6 +477,10 @@ function initPanelAnimation() {
 
         currentIndex = index;
         setProgress(index);
+
+        if (sections[index]?.querySelector("#hero-title")) {
+            scrambleHeroHeading();
+        }
     }
 
     function canNavigateWithWheel(observer) {
@@ -460,6 +513,11 @@ function initPanelAnimation() {
     currentIndex = initialIndex;
     setProgress(initialIndex);
     fitPanelContent();
+
+    if (sections[initialIndex]?.querySelector("#hero-title")) {
+        scrambleHeroHeading();
+    }
+
     window.addEventListener("resize", schedulePanelFit);
     window.addEventListener("orientationchange", schedulePanelFit);
 }
