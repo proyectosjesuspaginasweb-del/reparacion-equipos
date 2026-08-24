@@ -120,6 +120,14 @@ textarea {
     border-radius: 50%;
 }
 
+.brand-mark > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+    opacity: 0.7;   
+}   
+
 .main-nav {
     gap: 24px;
     font-weight: 700;
@@ -298,7 +306,7 @@ textarea {
 
 .eyebrow {
     margin: 0 0 14px;
-    font-size: .78rem;
+    font-size: 1.78rem;
     font-weight: 900;
     letter-spacing: 0;
     text-transform: uppercase;
@@ -313,7 +321,7 @@ textarea {
 .contact h2 {
     margin: 0;
     max-width: 920px;
-    font-size: clamp(2.35rem, 4.7vw, 7.6rem);
+    font-size: clamp(2.35rem, 3.7vw, 7.6rem);
     line-height: .92;
     letter-spacing: 0;
     text-transform: uppercase;
@@ -368,6 +376,7 @@ textarea {
 
 .slider-controls {
     gap: 10px;
+    min-height: 0vh;
 }
 
 .icon-button {
@@ -382,7 +391,7 @@ textarea {
 }
 
 .icon-button span {
-    font-size: 2rem;
+    font-size: 1rem;
     line-height: 1;
 }
 
@@ -1514,15 +1523,17 @@ body:not(.gsap-panels) main {
     }
 
     body.gsap-panels .slider {
-        min-height: 188px;
+        min-height: 155px;
+        min-width: 102%;
     }
 
     body.gsap-panels .bauhaus-scene {
-        min-height: 118px;
+        max-height: 150px;
     }
 
     body.gsap-panels .slide {
-        gap: 8px;
+        gap: 0px;
+        max-height: 31vh;
     }
 
     body.gsap-panels .slide-copy {
@@ -1629,6 +1640,10 @@ body:not(.gsap-panels) main {
         min-height: 66px;
         resize: none;
     }
+
+    section-heading{
+        font-size: 20px!important;
+    }
 }
 
 @media (max-width: 560px) and (max-height: 780px) {
@@ -1696,8 +1711,8 @@ body:not(.gsap-panels) main {
     }
 
     body.gsap-panels .icon-button {
-        width: 30px;
-        height: 30px;
+        width: 42px;
+        height: 19px;
         border-width: 2px;
     }
 
@@ -2207,7 +2222,7 @@ body.gsap-panels .chat-widget {
         min-height: 100dvh;
         padding-top: 118px;
         padding-bottom: 66px;
-        gap: 8px;
+        gap: 22px;
     }
 
     .hero-copy[class*="col-"],
@@ -2458,7 +2473,7 @@ body.gsap-panels .chat-widget {
     /* SERVICIOS movil */
     .services .inner,
     body.gsap-panels .services .inner {
-        padding: 172px 22px 86px;
+        padding: 172px 23px 63px;
     }
 
     /* PROCESO movil */
@@ -2528,7 +2543,7 @@ body.gsap-panels .chat-widget {
 
     .slider,
     body.gsap-panels .slider {
-        min-height: 245px;
+        min-height: 196px;
     }
 
     .bauhaus-scene {
@@ -2590,19 +2605,21 @@ body.gsap-panels .chat-widget {
     /* HERO movil bajo */
     .hero .inner,
     body.gsap-panels .hero .inner {
-        padding-top: 160px;
+        padding-top: 0;
     }
 
     /* SERVICIOS movil bajo */
     .services .inner,
     body.gsap-panels .services .inner {
         padding-top: 148px;
+        gap: 0;
     }
 
     /* PROCESO movil bajo */
     .process .inner,
     body.gsap-panels .process .inner {
         padding-top: 160px;
+        justify-content: center;
     }
 
     /* CONTACTO movil bajo */
@@ -2619,12 +2636,13 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .services h2,
     body.gsap-panels .process h2,
     body.gsap-panels .contact h2 {
-        font-size: clamp(1.55rem, 7.4vw, 2.2rem);
+        font-size: clamp(0.55rem, 3.4vw, 2.2rem);
     }
 
     .hero-actions {
         gap: 8px;
         margin-top: 14px;
+        border: yellow 1px solid;
     }
 
     .button,
@@ -2657,6 +2675,7 @@ body.gsap-panels .chat-widget {
     /* PROCESO escritorio bajo */
     body.gsap-panels .process .inner {
         padding-top: 300px;
+        justify-items: center;
     }
 
     /* CONTACTO escritorio bajo */
@@ -2756,7 +2775,7 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .objective h2,
     body.gsap-panels .location h2 {
         max-width: 100%;
-        font-size: clamp(1.75rem, 8vw, 2.55rem);
+        font-size: clamp(0.75rem, 4vw, 1.55rem);
         line-height: .98;
     }
 
@@ -2778,12 +2797,17 @@ body.gsap-panels .chat-widget {
     .map-card iframe {
         min-height: 260px;
     }
+
+    .eyebrow{
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 560px) and (max-height: 780px) {
     .objective .inner,
     body.gsap-panels .objective .inner {
-        padding-top: 148px;
+        padding-top: 165px;
+        gap: 0;
     }
 
     .location .inner,
@@ -2793,6 +2817,10 @@ body.gsap-panels .chat-widget {
 
     .map-card iframe {
         min-height: 220px;
+    }
+
+    .objective .eyebrow, .objective .section-heading{
+        font-size: 24px;
     }
 }
 
@@ -2810,5 +2838,321 @@ body.gsap-panels .chat-widget {
 
     body.gsap-panels .map-card iframe {
         min-height: 340px;
+    }
+}
+
+/* =========================================================
+   CONTROLES EDITABLES POR DISPOSITIVO
+   Cambia una clase aqui sin mover las demas secciones.
+   ========================================================= */
+
+/* TABLET Y MOVIL GRANDE: 561px a 980px */
+@media (min-width: 561px) and (max-width: 980px) {
+    /* HERO texto */
+    .hero-copy,
+    .hero-copy[class*="col-"],
+    body.gsap-panels .hero-copy,
+    body.gsap-panels .hero-copy[class*="col-"] {
+        width: min(100%, 640px);
+        max-width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* HERO slider */
+    .slider-shell,
+    .slider-shell[class*="col-"],
+    body.gsap-panels .slider-shell,
+    body.gsap-panels .slider-shell[class*="col-"] {
+        width: min(100%, 640px);
+        max-width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: initial;
+        justify-items: initial;
+    }
+
+    /* OBJETIVO tarjetas */
+    .commitment-grid,
+    .commitment-grid.row,
+    body.gsap-panels .commitment-grid,
+    body.gsap-panels .commitment-grid.row {
+        width: min(100%, 640px);
+        max-width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* SERVICIOS tarjetas */
+    .service-grid,
+    .service-grid.row,
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row {
+        width: min(100%, 640px);
+        max-width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* PROCESO tarjetas */
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: min(100%, 640px);
+        max-width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* UBICACION mapa */
+    .map-stack,
+    .map-stack[class*="col-"],
+    body.gsap-panels .map-stack,
+    body.gsap-panels .map-stack[class*="col-"] {
+        width: min(100%, 640px);
+        max-width: min(100%, 640px);
+        margin-left: auto;
+        margin-right: auto;
+        text-align: initial;
+        justify-items: initial;
+    }
+}
+
+/* MOVIL: hasta 560px */
+@media (max-width: 560px) {
+    /* HERO texto */
+    .hero-copy,
+    .hero-copy[class*="col-"],
+    body.gsap-panels .hero-copy,
+    body.gsap-panels .hero-copy[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* HERO slider */
+    .slider-shell,
+    .slider-shell[class*="col-"],
+    body.gsap-panels .slider-shell,
+    body.gsap-panels .slider-shell[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+        text-align: initial;
+        justify-items: initial;
+        max-height: 29px;
+    }
+
+    /* OBJETIVO tarjetas */
+    .commitment-grid,
+    .commitment-grid.row,
+    body.gsap-panels .commitment-grid,
+    body.gsap-panels .commitment-grid.row {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* SERVICIOS tarjetas */
+    .service-grid,
+    .service-grid.row,
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* PROCESO tarjetas */
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        justify-items: center;
+    }
+
+    /* UBICACION mapa */
+    .map-stack,
+    .map-stack[class*="col-"],
+    body.gsap-panels .map-stack,
+    body.gsap-panels .map-stack[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+        text-align: initial;
+        justify-items: initial;
+    }
+
+    .map-card,
+    body.gsap-panels .map-card {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .map-card iframe,
+    body.gsap-panels .map-card iframe {
+        min-height: 210px;
+    }
+}
+
+/* MOVIL BAJO: celulares con poca altura */
+@media (max-width: 560px) and (max-height: 780px) {
+    /* UBICACION seccion */
+    .location .inner,
+    body.gsap-panels .location .inner {
+        padding-top: 150px;
+        padding-bottom: 70px;
+        gap: 8px;
+    }
+
+    /* UBICACION texto */
+    .location .panel-copy,
+    .location .panel-copy[class*="col-"],
+    body.gsap-panels .location .panel-copy,
+    body.gsap-panels .location .panel-copy[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .location h2,
+    body.gsap-panels .location h2 {
+        font-size: clamp(1.35rem, 6.8vw, 1.9rem);
+        line-height: .98;
+    }
+
+    .location p,
+    body.gsap-panels .location p {
+        font-size: .78rem;
+        line-height: 1.22;
+    }
+
+    /* HERO texto */
+    .hero-copy,
+    .hero-copy[class*="col-"],
+    body.gsap-panels .hero-copy,
+    body.gsap-panels .hero-copy[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* HERO slider */
+    .slider-shell,
+    .slider-shell[class*="col-"],
+    body.gsap-panels .slider-shell,
+    body.gsap-panels .slider-shell[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* OBJETIVO tarjetas */
+    .commitment-grid,
+    .commitment-grid.row,
+    body.gsap-panels .commitment-grid,
+    body.gsap-panels .commitment-grid.row {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* SERVICIOS tarjetas */
+    .service-grid,
+    .service-grid.row,
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* PROCESO tarjetas */
+    .process-list,
+    .process-list.row,
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: 100%;
+        max-width: 100%;
+        gap: 25px;
+    }
+
+    /* UBICACION mapa */
+    .map-stack,
+    .map-stack[class*="col-"],
+    body.gsap-panels .map-stack,
+    body.gsap-panels .map-stack[class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .map-card,
+    body.gsap-panels .map-card {
+        gap: 8px;
+        padding: 8px;
+        max-height: 53vh;
+    }
+
+    .map-card > iframe > a{
+        border: #20d6ff 2px solid;
+        min-height: 50vh;
+    }
+
+    .map-card iframe,
+    body.gsap-panels .map-card iframe {
+        min-height: 140px;
+    }
+}
+
+/* ESCRITORIO BAJO: laptops o pantallas con poca altura */
+@media (min-width: 981px) and (max-height: 860px) {
+    /* HERO texto */
+    body.gsap-panels .hero-copy,
+    body.gsap-panels .hero-copy[class*="col-"] {
+        width: min(48vw, 640px);
+        max-width: min(48vw, 640px);
+    }
+
+    /* HERO slider */
+    body.gsap-panels .slider-shell,
+    body.gsap-panels .slider-shell[class*="col-"] {
+        width: min(60vw, 640px);
+        max-width: min(60vw, 640px);
+    }
+
+    /* OBJETIVO tarjetas */
+    body.gsap-panels .commitment-grid,
+    body.gsap-panels .commitment-grid.row {
+        width: min(84vw, 1120px);
+        max-width: min(84vw, 1120px);
+    }
+
+    /* SERVICIOS tarjetas */
+    body.gsap-panels .service-grid,
+    body.gsap-panels .service-grid.row {
+        width: min(94vw, 1280px);
+        max-width: min(94vw, 1280px);
+    }
+
+    /* PROCESO tarjetas */
+    body.gsap-panels .process-list,
+    body.gsap-panels .process-list.row {
+        width: min(84vw, 980px);
+        max-width: min(84vw, 980px);
+    }
+
+    /* UBICACION mapa */
+    body.gsap-panels .map-stack,
+    body.gsap-panels .map-stack[class*="col-"] {
+        width: min(46vw, 680px);
+        max-width: min(46vw, 680px);
     }
 }
