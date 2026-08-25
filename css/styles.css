@@ -4104,11 +4104,13 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .slider-shell,
     body.gsap-panels .slider-shell[class*="col-"] {
         width: min(48vw, 650px);
-        max-width: min(48vw, 650px);
-        min-height: 380px;
+        max-width: min(45vw, 650px);
+        min-height: 429px;
         max-height: calc(100dvh - 132px);
         padding: 12px;
         align-self: center;
+        top: 30px;
+        left: 30px;
     }
 
     /* HERO slider toolbar */
@@ -4129,7 +4131,7 @@ body.gsap-panels .chat-widget {
 
     /* HERO slider interno */
     body.gsap-panels .slider {
-        min-height: 298px;
+        min-height: 320px;
     }
 
     /* HERO escena grafica */
@@ -4139,7 +4141,7 @@ body.gsap-panels .chat-widget {
 
     /* HERO texto del slider */
     body.gsap-panels .slide-copy {
-        padding: 10px 14px;
+        padding: 5px 14px;
     }
 
     body.gsap-panels .slide-copy h2 {
@@ -4162,6 +4164,7 @@ body.gsap-panels .chat-widget {
         min-height: 100dvh;
         padding-top: 110px;
         padding-bottom: 82px;
+        align-content: center;
     }
 
     /* OBJETIVO tarjetas */
@@ -4225,20 +4228,26 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .location .inner {
         min-height: 100dvh;
         padding-top: 104px;
-        padding-right: 72px;
+        padding-right: clamp(120px, 10vw, 150px);
         padding-bottom: 82px;
         align-content: center;
         justify-items: center;
+        column-gap: clamp(34px, 5vw, 72px);
     }
 
     /* UBICACION mapa */
     body.gsap-panels .map-stack,
     body.gsap-panels .map-stack[class*="col-"] {
-        width: min(46vw, 680px);
-        max-width: min(46vw, 680px);
+        width: min(46vw, 640px);
+        max-width: min(46vw, 640px);
+    }
+
+    body.gsap-panels .map-card {
+        padding: 16px;
+        gap: 12px;
     }
 
     body.gsap-panels .map-card iframe {
-        min-height: 300px;
+        min-height: clamp(240px, 42vh, 320px);
     }
 }
