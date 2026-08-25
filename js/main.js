@@ -66,7 +66,7 @@ if (contactForm) {
         const message = data.get("message") || "Necesito una revision tecnica.";
         const text = `Hola, soy ${name}. ${message}`;
 
-        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
     });
 }
 
@@ -151,7 +151,7 @@ function initSupportBot() {
         }
 
         function renderOptions(step) {
-            botOptions.innerHTML = "";
+            botOptions.replaceChildren();
 
             if (!step.options) {
                 return;
@@ -176,7 +176,7 @@ function initSupportBot() {
                 botQuestion.textContent = "Listo. Revise el resumen y mandalo por WhatsApp.";
                 botInput.hidden = true;
                 botNext.textContent = "Enviar por WhatsApp";
-                botOptions.innerHTML = "";
+                botOptions.replaceChildren();
                 updateForm();
             } else {
                 const step = steps[currentStep];
@@ -196,7 +196,7 @@ function initSupportBot() {
         function saveAnswer() {
             if (currentStep >= steps.length) {
                 const text = buildSummary();
-                window.open(createWhatsappLink(text), "_blank", "noopener");
+                window.open(createWhatsappLink(text), "_blank", "noopener,noreferrer");
                 return;
             }
 

@@ -3209,7 +3209,7 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .process .inner {
         padding-top: 126px;
         padding-bottom: 70px;
-        gap: 12px;
+        gap: 20px;
         align-items: center;
     }
 
@@ -3231,7 +3231,7 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .process-list.row {
         width: min(100%, 300px);
         max-width: min(100%, 300px);
-        gap: 8px;
+        gap: 50px;
         margin-left: auto;
         margin-right: auto;
         justify-items: center;
@@ -3760,6 +3760,7 @@ body.gsap-panels .chat-widget {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+        
     }
 
     /* OBJETIVO tarjetas */
@@ -3797,7 +3798,7 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .process .inner {
         padding-top: 220px;
         padding-bottom: 96px;
-        gap: 26px;
+        gap: 40px;
         align-items: center;
     }
 
@@ -3820,6 +3821,7 @@ body.gsap-panels .chat-widget {
         margin-left: auto;
         margin-right: auto;
         justify-items: center;
+        gap: 50px;
     }
 
     /* UBICACION seccion */
@@ -4103,8 +4105,56 @@ body.gsap-panels .chat-widget {
     body.gsap-panels .slider-shell[class*="col-"] {
         width: min(48vw, 650px);
         max-width: min(48vw, 650px);
-        min-height: 470px;
-        max-height: calc(100dvh - 150px);
+        min-height: 380px;
+        max-height: calc(100dvh - 132px);
+        padding: 12px;
+        align-self: center;
+    }
+
+    /* HERO slider toolbar */
+    body.gsap-panels .slider-toolbar {
+        gap: 10px;
+        margin-bottom: 10px;
+        font-size: .8rem;
+    }
+
+    body.gsap-panels .slider-controls {
+        gap: 8px;
+    }
+
+    body.gsap-panels .slider-toolbar .icon-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    /* HERO slider interno */
+    body.gsap-panels .slider {
+        min-height: 298px;
+    }
+
+    /* HERO escena grafica */
+    body.gsap-panels .bauhaus-scene {
+        min-height: 184px;
+    }
+
+    /* HERO texto del slider */
+    body.gsap-panels .slide-copy {
+        padding: 10px 14px;
+    }
+
+    body.gsap-panels .slide-copy h2 {
+        font-size: clamp(1.45rem, 2.7vw, 2.05rem);
+        line-height: .98;
+    }
+
+    body.gsap-panels .slide-copy p {
+        font-size: .84rem;
+        line-height: 1.22;
+    }
+
+    /* HERO puntos del slider */
+    body.gsap-panels .slider-dots {
+        margin-top: 10px;
     }
 
     /* OBJETIVO seccion */
@@ -4161,6 +4211,7 @@ body.gsap-panels .chat-widget {
         margin-left: auto;
         margin-right: auto;
         justify-items: center;
+        gap: 40px;
     }
 
     /* PROCESO tarjeta individual */
