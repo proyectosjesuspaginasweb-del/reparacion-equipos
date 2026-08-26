@@ -143,6 +143,53 @@ textarea {
     border-color: var(--yellow);
 }
 
+.menu-toggle {
+    display: none;
+    width: 48px;
+    height: 46px;
+    place-items: center;
+    padding: 0;
+    border: 3px solid var(--line);
+    background: linear-gradient(135deg, var(--yellow), var(--orange), var(--pink));
+    box-shadow: 5px 5px 0 var(--ink);
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.menu-toggle:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--ink);
+}
+
+.menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    grid-area: 1 / 1;
+    background: var(--ink);
+    transition: transform .25s ease, opacity .2s ease;
+}
+
+.menu-toggle span:nth-child(1) {
+    transform: translateY(-8px);
+}
+
+.menu-toggle span:nth-child(3) {
+    transform: translateY(8px);
+}
+
+.menu-toggle.is-active span:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+.menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.is-active span:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
 .header-action,
 .button {
     display: inline-flex;
@@ -4249,5 +4296,124 @@ body.gsap-panels .chat-widget {
 
     body.gsap-panels .map-card iframe {
         min-height: clamp(240px, 42vh, 320px);
+    }
+}
+
+/* MENU RESPONSIVE: hamburguesa para moviles y tablets */
+@media (max-width: 980px) {
+    .site-header,
+    body.gsap-panels .site-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 48px;
+        align-items: center;
+        gap: 10px 14px;
+        min-height: auto;
+        padding: 10px 14px;
+        overflow: visible;
+    }
+
+    .brand,
+    body.gsap-panels .brand {
+        min-width: 0;
+    }
+
+    .brand span:last-child,
+    body.gsap-panels .brand span:last-child {
+        display: inline;
+        max-width: min(62vw, 420px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .menu-toggle,
+    body.gsap-panels .menu-toggle {
+        display: grid;
+        justify-self: end;
+    }
+
+    .header-action,
+    body.gsap-panels .header-action {
+        display: none;
+    }
+
+    .main-nav,
+    body.gsap-panels .site-header .main-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 14px;
+        left: 14px;
+        z-index: 12;
+        display: grid !important;
+        grid-template-columns: 1fr;
+        width: calc(100vw - 28px) !important;
+        max-width: calc(100vw - 28px) !important;
+        flex-basis: auto !important;
+        gap: 8px;
+        padding: 12px;
+        border: 3px solid var(--line);
+        background: rgba(9, 8, 18, .96);
+        box-shadow: var(--shadow);
+        overflow: visible;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px) scale(.98);
+        transform-origin: top right;
+        transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+        visibility: hidden;
+    }
+
+    body.is-menu-open .main-nav,
+    body.gsap-panels.is-menu-open .site-header .main-nav {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+    }
+
+    .main-nav a,
+    body.gsap-panels .site-header .main-nav a {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 14px;
+        border: 2px solid rgba(255, 240, 199, .55);
+        background: rgba(255, 240, 199, .12);
+        color: var(--cream);
+        font-size: .9rem;
+        text-align: left;
+    }
+}
+
+@media (max-width: 560px) {
+    .site-header,
+    body.gsap-panels .site-header {
+        grid-template-columns: minmax(0, 1fr) 44px;
+        padding: 10px 12px;
+    }
+
+    .menu-toggle,
+    body.gsap-panels .menu-toggle {
+        width: 44px;
+        height: 42px;
+    }
+
+    .brand-mark {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand span:last-child,
+    body.gsap-panels .brand span:last-child {
+        max-width: calc(100vw - 122px);
+        font-size: .86rem;
+    }
+
+    .main-nav,
+    body.gsap-panels .site-header .main-nav {
+        right: 12px;
+        left: 12px;
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+        padding: 10px;
     }
 }

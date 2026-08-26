@@ -18,7 +18,13 @@
             <span>Reparacion Tecnologica Lizard</span>
         </a>
 
-        <nav class="main-nav" aria-label="Navegacion principal">
+        <button class="menu-toggle" type="button" aria-label="Abrir menu de navegacion" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Navegacion principal" data-mobile-menu>
             <a href="#objetivo" data-panel-target="1">Objetivo</a>
             <a href="#servicios" data-panel-target="2">Servicios</a>
             <a href="#proceso" data-panel-target="3">Proceso</a>

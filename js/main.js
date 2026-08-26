@@ -12,6 +12,8 @@ const botNext = document.querySelector("[data-bot-next]");
 const botBack = document.querySelector("[data-bot-back]");
 const botReset = document.querySelector("[data-bot-reset]");
 const botOptions = document.querySelector("[data-bot-options]");
+const menuToggle = document.querySelector("[data-menu-toggle]");
+const mobileMenu = document.querySelector("[data-mobile-menu]");
 const whatsappNumber = "527227729418";
 
 let activeIndex = 0;
@@ -238,6 +240,43 @@ function initSupportBot() {
 }
 
 initSupportBot();
+
+function initMobileMenu() {
+    if (!menuToggle || !mobileMenu) {
+        return;
+    }
+
+    const mobileQuery = window.matchMedia("(max-width: 980px)");
+
+    function setMenuOpen(isOpen) {
+        document.body.classList.toggle("is-menu-open", isOpen);
+        menuToggle.classList.toggle("is-active", isOpen);
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menu de navegacion" : "Abrir menu de navegacion");
+    }
+
+    menuToggle.addEventListener("click", () => {
+        setMenuOpen(!document.body.classList.contains("is-menu-open"));
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            setMenuOpen(false);
+        }
+    });
+
+    mobileQuery.addEventListener("change", (event) => {
+        if (!event.matches) {
+            setMenuOpen(false);
+        }
+    });
+}
+
+initMobileMenu();
 
 if (chatToggle && chatWidget) {
     function setChatOpen(isOpen) {
