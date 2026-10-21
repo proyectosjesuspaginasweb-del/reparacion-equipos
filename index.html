@@ -1,241 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TecLizard | Soporte tecnico y mantenimiento</title>
-    <meta name="description" content="Servicio tecnico para computadoras, laptops y celulares con diagnostico, reparacion y mantenimiento preventivo.">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Reparación y mantenimiento de computadoras y celulares: pasta térmica, discos, RAM, pantallas, baterías, software y desarrollo web.">
+    <title>TechFix Pro | Reparaciones y soporte técnico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css?v=logo-navigation-2">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+    <script src="./js/animation.js?v=logo-navigation-2" defer></script>
+
 </head>
 <body>
-    <header class="site-header">
-        <a class="brand" href="#" aria-label="TechRepair inicio">
-            <span class="brand-mark"><img src="./assets/img/LogoPaginaOficial.png" alt="Logotipo de TechRepair"></span>
-            <span>Reparacion Tecnologica Lizard</span>
-        </a>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-        <button class="menu-toggle" type="button" aria-label="Abrir menu de navegacion" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </button>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="#inicio" aria-label="TechFix Pro, inicio"><span class="brand-icon material-symbols-outlined" aria-hidden="true">memory</span><span><strong>TECHFIX <em>PRO</em></strong><small>REPARACIÓN Y SOPORTE</small></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation"><span class="menu-bars" aria-hidden="true">☰</span><span>Menú</span></button>
+    <nav id="main-navigation" aria-label="Navegación principal">
+      <a href="#servicios">Reparaciones</a><a href="#servicios-soporte">Soporte y web</a><a href="#proceso">Cómo trabajamos</a><a href="#preguntas">Preguntas frecuentes</a><a href="#redes-sociales">Redes sociales</a><a class="nav-cta" href="#cotizador-express">Solicitar cotización ↗</a>
+    </nav>
+  </div>
+</header>
 
-        <nav class="main-nav" id="main-nav" aria-label="Navegacion principal" data-mobile-menu>
-            <a href="#objetivo" data-panel-target="1">Objetivo</a>
-            <a href="#servicios" data-panel-target="2">Servicios</a>
-            <a href="#proceso" data-panel-target="3">Proceso</a>
-            <a href="#ubicacion" data-panel-target="4">Ubicacion</a>
-        </nav>
-
-        <a class="header-action" href="#ubicacion" data-panel-target="4">Ubicacion</a>
-    </header>
-
-    <main>
-        <section class="panel-section hero" aria-labelledby="hero-title">
-            <div class="bg bg-paper" aria-hidden="true"></div>
-            <div class="outer">
-                <div class="inner row g-3 g-lg-5 align-items-center">
-            <div class="hero-copy panel-copy col-12 col-lg-6">
-                <p class="eyebrow">Soporte tecnico en reperacion en celulares y laptop</p>
-                <h1 class="section-heading" id="hero-title">Tu equipo vuelve a la accion.</h1>
-                <p class="hero-text">Diagnostico claro para computadoras, laptops y celulares. Sin vueltas: revisamos la falla, explicamos el riesgo y te decimos cuanto cuesta antes de reparar.</p>
-                <div class="hero-actions">
-                    <a class="button primary" href="#ubicacion" data-panel-target="4">Ver ubicacion</a>
-                    <a class="button secondary" href="#servicios" data-panel-target="2">Ver servicios</a>
-                </div>
-            </div>
-
-            <section class="slider-shell col-12 col-lg-6" aria-label="Servicios destacados">
-                <div class="slider-toolbar">
-                    <span>Modo reparacion</span>
-                    <div class="slider-controls">
-                        <button class="icon-button" type="button" data-slider-prev aria-label="Servicio anterior"><span aria-hidden="true">‹</span></button>
-                        <button class="icon-button" type="button" data-slider-next aria-label="Servicio siguiente"><span aria-hidden="true">›</span></button>
-                    </div>
-                </div>
-
-                <div class="slider" data-slider>
-                    <article class="slide is-active" data-slide>
-                        <div class="bauhaus-scene scene-yellow" aria-hidden="true">
-                            <span class="shape circle"></span>
-                            <span class="shape bar"></span>
-                            <span class="shape square"></span>
-                            <span class="device laptop"></span>
-                        </div>
-                        <div class="slide-copy">
-                            <p class="slide-kicker">01 / Computo</p>
-                            <h2>Mantenimiento extremo</h2>
-                            <p>Limpieza interna, cambio de disco duro, cambio de memoria RAM, revision de ventilacion y optimizacion de arranque.</p>
-                        </div>
-                    </article>
-
-                    <article class="slide" data-slide>
-                        <div class="bauhaus-scene scene-red" aria-hidden="true">
-                            <span class="shape half"></span>
-                            <span class="shape ring"></span>
-                            <span class="shape column"></span>
-                            <span class="device phone"></span>
-                        </div>
-                        <div class="slide-copy">
-                            <p class="slide-kicker">02 / Celulares</p>
-                            <h2>Rescate movil</h2>
-                            <p>Diagnostico de carga, pantalla, bateria, sistema lento y respaldos antes de reinstalar.</p>
-                        </div>
-                    </article>
-
-                    <article class="slide" data-slide>
-                        <div class="bauhaus-scene scene-blue" aria-hidden="true">
-                            <span class="shape dot-grid"></span>
-                            <span class="shape stripe"></span>
-                            <span class="shape block"></span>
-                            <span class="device tower"></span>
-                        </div>
-                        <div class="slide-copy">
-                            <p class="slide-kicker">03 / Seguridad</p>
-                            <h2>Sistema limpio</h2>
-                            <p>Respaldo, instalacion limpia, drivers, programas basicos y configuracion segura para trabajar.</p>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="slider-dots" aria-label="Seleccionar servicio">
-                    <button class="dot is-active" type="button" data-slide-dot="0" aria-label="Ir al servicio 1"></button>
-                    <button class="dot" type="button" data-slide-dot="1" aria-label="Ir al servicio 2"></button>
-                    <button class="dot" type="button" data-slide-dot="2" aria-label="Ir al servicio 3"></button>
-                </div>
-            </section>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel-section objective" id="objetivo" aria-labelledby="objective-title">
-            <div class="bg bg-ink" aria-hidden="true"></div>
-            <div class="outer">
-                <div class="inner container-fluid">
-            <div class="panel-copy mx-auto">
-                <p class="eyebrow">Objetivo y compromiso</p>
-                <h2 class="section-heading" id="objective-title">Reparar claro, entregar confiable.</h2>
-            </div>
-            <div class="commitment-grid row g-3 g-xl-4">
-                <article class="col-12 col-md-6">
-                    <span class="service-number">Objetivo</span>
-                    <h3>Diagnostico honesto</h3>
-                    <p>Identificar la falla real del equipo, explicar el riesgo y proponer una solucion antes de cobrar o cambiar piezas.</p>
-                </article>
-                <article class="col-12 col-md-6">
-                    <span class="service-number">Compromiso</span>
-                    <h3>Trabajo transparente</h3>
-                    <p>Cuidar tus datos, avisar tiempos reales de entrega y confirmar el costo antes de iniciar la reparacion.</p>
-                </article>
-            </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel-section services" id="servicios" aria-labelledby="services-title">
-            <div class="bg bg-yellow" aria-hidden="true"></div>
-            <div class="outer">
-                <div class="inner container-fluid">
-            <div class="panel-copy mx-auto">
-                <p class="eyebrow">Servicios clave</p>
-                <h2 class="section-heading" id="services-title">Fallos tecnicos bajo control.</h2>
-            </div>
-            <div class="service-grid row g-3 g-xl-4">
-                <article class="col-12 col-md-4">
-                    <span class="service-number">01</span>
-                    <h3>Laptops y PC</h3>
-                    <p>Equipos lentos, calentamiento, instalacion de sistema, memoria, disco y limpieza.</p>
-                </article>
-                <article class="col-12 col-md-4">
-                    <span class="service-number">02</span>
-                    <h3>Celulares</h3>
-                    <p>Fallas de carga, respaldo, configuracion, actualizaciones y problemas de software.</p>
-                </article>
-                <article class="col-12 col-md-4">
-                    <span class="service-number">03</span>
-                    <h3>Asesoria</h3>
-                    <p>Compra de equipo, mejora de componentes, seguridad basica y uso correcto.</p>
-                </article>
-            </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel-section process" id="proceso" aria-labelledby="process-title">
-            <div class="bg bg-ink" aria-hidden="true"></div>
-            <div class="outer">
-                <div class="inner container-fluid">
-            <p class="eyebrow">Proceso</p>
-            <h2 class="section-heading" id="process-title">Primero cazamos la falla, luego reparamos.</h2>
-            <div class="process-list row g-3">
-                <div class="col-12 col-md-4"><strong>1.</strong> Recibimos sintomas y datos del equipo.</div>
-                <div class="col-12 col-md-4"><strong>2.</strong> Revisamos causa probable y riesgos.</div>
-                <div class="col-12 col-md-4"><strong>3.</strong> Confirmas costo antes del servicio.</div>
-            </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel-section location" id="ubicacion" aria-labelledby="location-title">
-            <div class="bg bg-blue" aria-hidden="true"></div>
-            <div class="outer">
-                <div class="inner row g-3 g-lg-5 align-items-center">
-            <div class="panel-copy col-12 col-lg-6">
-                <p class="eyebrow">Ubicacion</p>
-                <h2 class="section-heading" id="location-title">Encuentra el taller.</h2>
-                <p>Consulta la ruta en Google Maps y usa el asistente de WhatsApp para confirmar horario antes de llevar tu equipo.</p>
-            </div>
-            <div class="map-stack col-12 col-lg-6">
-                <div class="map-card">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.3748515100688!2d-99.09146816505114!3d19.4393987023149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fbf9c743a6cf%3A0x740db86028c2a05b!2sCalle%20Ote.%20168%20430%2C%20Moctezuma%202da%20Secc%2C%20Venustiano%20Carranza%2C%2015530%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1787512207571!5m2!1ses-419!2smx" width="600" height="250" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-                        <a class="button primary map-link" href="https://www.google.com/maps/search/?api=1&query=Calle%20Ote.%20168%20430%2C%20Moctezuma%202da%20Secc%2C%20Venustiano%20Carranza%2C%2015530%20Ciudad%20de%20Mexico%2C%20CDMX" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a>
-                </div>
-            </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div class="panel-progress" aria-hidden="true">
-        <span class="is-active"></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+<main id="contenido">
+  <section class="hero section" id="inicio">
+    <div class="container">
+      <div class="eyebrow hero-tag"><span class="status-dot" aria-hidden="true"></span> COMPUTADORAS · CELULARES · DESARROLLO WEB</div>
+      <div class="hero-grid">
+        <div class="hero-copy"><p class="eyebrow accent">SOLUCIONES PARA EL DÍA A DÍA</p><div class="heading-tilt"><div class="logo-outer"><h1 class="logo">Dale una nueva vida <span>a tu equipo.</span></h1></div></div><p class="lead">Reparaciones, mejoras y mantenimiento sin complicaciones. Desde un cambio de pasta térmica hasta una pantalla nueva, te ayudamos a encontrar la solución que necesitas.</p><div class="actions"><a class="button primary" href="#cotizador-express">Consultar mi reparación <span aria-hidden="true">↗</span></a><a class="button secondary" href="#servicios">Ver servicios</a></div><div class="hero-notes"><span>✓ Atención clara</span><span>✓ Revisión por modelo</span><span>✓ Presupuesto antes de reparar</span></div></div>
+        <div class="equipment-panel" aria-label="Servicios para computadoras y celulares"><div class="panel-label"><span>TU EQUIPO, EN BUENAS MANOS</span><span aria-hidden="true">+</span></div><div class="device-scene" aria-hidden="true"><div class="computer"><div class="computer-screen"><span class="material-symbols-outlined">build</span><span>MANTENIMIENTO<br>Y REPARACIÓN</span><div class="scan-line"></div></div><div class="computer-base"></div></div><div class="phone"><span class="phone-speaker"></span><span class="material-symbols-outlined">battery_charging_full</span><span>CELULARES</span></div><span class="scene-cross cross-one">+</span><span class="scene-cross cross-two">+</span></div><div class="panel-footer"><span>HARDWARE + SOFTWARE</span><span class="accent">CUIDADO EN CADA DETALLE</span></div></div>
+      </div>
+      <div class="category-strip"><div><span class="material-symbols-outlined" aria-hidden="true">laptop_windows</span><span><strong>Computadoras</strong><small>Mejoras y mantenimiento</small></span></div><div><span class="material-symbols-outlined" aria-hidden="true">smartphone</span><span><strong>Celulares</strong><small>Pantallas y baterías</small></span></div><div><span class="material-symbols-outlined" aria-hidden="true">settings</span><span><strong>Software</strong><small>Instalación y limpieza</small></span></div><div><span class="material-symbols-outlined" aria-hidden="true">code</span><span><strong>Desarrollo web</strong><small>Tu negocio en internet</small></span></div></div>
     </div>
+  </section>
+  <section class="section" id="servicios"><div class="container"><div class="section-heading"><div><p class="eyebrow accent">01 / LO QUE HACEMOS</p><h2>Reparaciones sencillas.<br><span>Soluciones útiles.</span></h2></div><p>Cuéntanos qué le pasa a tu equipo. Revisamos las opciones y te explicamos el trabajo antes de comenzar.</p></div><div class="services-grid"><article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">thermostat</span><span class="eyebrow">01 / COMPUTADORAS</span></div><h3>Cambio de pasta térmica</h3><p>Mantenimiento para laptops y computadoras que se calientan. Revisamos la ventilación y renovamos la pasta térmica.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="pasta">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">hard_drive</span><span class="eyebrow">02 / COMPUTADORAS</span></div><h3>Cambio de disco duro o SSD</h3><p>Reemplazo de discos y actualización a SSD. Consulta también por el traslado de tus archivos antes del cambio.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="disco">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">memory</span><span class="eyebrow">03 / COMPUTADORAS</span></div><h3>Ampliación de memoria RAM</h3><p>Revisamos la compatibilidad de tu equipo para instalar o reemplazar memoria RAM.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="ram">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">laptop_windows</span><span class="eyebrow">04 / COMPUTADORAS</span></div><h3>Cambio de display de laptop</h3><p>Reemplazo de pantallas rotas, con líneas o sin imagen, después de revisar el origen de la falla.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="display">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">smartphone</span><span class="eyebrow">05 / CELULARES</span></div><h3>Cambio de display de celular</h3><p>Cambio de pantalla o módulo de display. La refacción se cotiza según la marca y el modelo.</p><a class="service-link" href="#cotizador-express" data-category="celular" data-service="display">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">battery_charging_full</span><span class="eyebrow">06 / CELULARES</span></div><h3>Cambio de pilas y baterías</h3><p>Reemplazo de baterías de celular y laptop, y pilas internas de computadora. Revisamos qué pieza necesita tu equipo.</p><a class="service-link" href="#cotizador-express" data-category="celular" data-service="bateria">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+</div><p class="service-next"><a class="button secondary" href="#servicios-soporte">Ver más servicios ↓</a></p></div></section><section class="section section-alt" id="servicios-soporte"><div class="container"><div class="section-heading"><div><p class="eyebrow accent">01 / MÁS SERVICIOS</p><h2>Mantenimiento, soporte<br><span>y desarrollo web.</span></h2></div><p>Revisión de equipos, limpieza, programas y soluciones para tu negocio.</p></div><div class="services-grid"><article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">developer_board</span><span class="eyebrow">07 / CELULARES</span></div><h3>Revisión de tarjeta lógica</h3><p>Diagnóstico de fallas de encendido y revisión de la tarjeta lógica. Te explicamos si requiere reparación o reemplazo.</p><a class="service-link" href="#cotizador-express" data-category="celular" data-service="tarjeta">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">download</span><span class="eyebrow">08 / COMPUTADORAS</span></div><h3>Instalación de programas</h3><p>Instalación y configuración de programas compatibles con tu computadora y con la licencia correspondiente.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="programas">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">shield</span><span class="eyebrow">09 / COMPUTADORAS</span></div><h3>Limpieza de software</h3><p>Revisión de programas innecesarios, aplicaciones al inicio y software no deseado para mejorar el funcionamiento.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="software">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">cleaning_services</span><span class="eyebrow">10 / COMPUTADORAS</span></div><h3>Limpieza de hardware</h3><p>Limpieza interna de polvo en ventiladores, disipadores y componentes, además de limpieza exterior del equipo.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="hardware">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">code</span><span class="eyebrow">11 / WEB</span></div><h3>Desarrollo web</h3><p>Páginas informativas, catálogos y sitios para negocios. Definimos contigo el contenido, las secciones y las funciones.</p><a class="service-link" href="#cotizador-express" data-category="web" data-service="sitio">Consultar servicio <span aria-hidden="true">↗</span></a></article>
+<article class="service-card"><div class="card-top"><span class="material-symbols-outlined" aria-hidden="true">support_agent</span><span class="eyebrow">12 / COMPUTADORAS</span></div><h3>Soporte y ajustes básicos</h3><p>Configuración de impresoras, conexión Wi-Fi y ajustes del sistema. Cuéntanos qué necesitas resolver.</p><a class="service-link" href="#cotizador-express" data-category="computadora" data-service="soporte">Consultar servicio <span aria-hidden="true">↗</span></a></article></div></div></section>
+  <section class="section section-alt" id="proceso"><div class="container"><div class="section-heading"><div><p class="eyebrow accent">02 / PASO A PASO</p><h2>Así de sencillo.</h2></div><p>Sin términos complicados: sabrás qué necesita tu equipo y qué incluye el servicio.</p></div><ol class="steps"><li><span class="step-number">01</span><h3>Cuéntanos qué necesitas</h3><p>Comparte la marca, el modelo y la falla. Para una página web, cuéntanos sobre tu negocio.</p></li><li><span class="step-number">02</span><h3>Revisamos y cotizamos</h3><p>Confirmamos el trabajo, la compatibilidad de las piezas y su disponibilidad.</p></li><li><span class="step-number">03</span><h3>Tú autorizas</h3><p>Te explicamos el costo y el tiempo estimado antes de realizar el servicio.</p></li><li><span class="step-number">04</span><h3>Probamos y entregamos</h3><p>Revisamos el funcionamiento y te compartimos recomendaciones de cuidado.</p></li></ol></div></section>
+  <section class="section" id="cotizador-express"><div class="container"><p class="eyebrow accent">03 / HABLEMOS DE TU EQUIPO</p><h2>Cuéntanos qué necesitas.</h2><p class="lead">Nuestro asistente de preguntas te ayuda a preparar los detalles para el técnico.</p><button class="button primary" type="button" data-open-chat>Iniciar conversación ↗</button></div></section>
+  <section class="section section-alt" id="preguntas"><div class="container faq-grid"><div><p class="eyebrow accent">04 / ANTES DE COMENZAR</p><h2>Resolvemos<br><span>tus dudas.</span></h2></div><div class="faq-list"><details><summary>¿Cuánto cuesta una reparación?</summary><p>Depende del modelo, la falla y las refacciones. Primero revisamos lo que necesitas y te damos un presupuesto para que decidas.</p></details><details><summary>¿Pueden cambiar el disco o ampliar la RAM?</summary><p>Sí. Antes confirmamos la compatibilidad y las opciones de tu computadora. Si necesitas conservar archivos, indícalo antes de cambiar el disco.</p></details><details><summary>¿Cambian pantallas y baterías de celulares?</summary><p>Sí. Compártenos la marca y el modelo para revisar disponibilidad y cotizar la refacción adecuada.</p></details><details><summary>¿Qué pasa si la falla está en la tarjeta lógica?</summary><p>Revisamos el equipo para determinar qué falla y si es viable reparar o reemplazar la tarjeta. Te explicamos las opciones antes de intervenir.</p></details><details><summary>¿Debo respaldar mis archivos?</summary><p>Es recomendable tener un respaldo antes de cualquier servicio. Avísanos si necesitas ayuda para hacerlo o si hay archivos importantes que debamos conservar.</p></details><details><summary>¿También hacen páginas web?</summary><p>Sí. Podemos preparar una página para presentar tu negocio, mostrar tus servicios o publicar un catálogo. El alcance y las funciones se acuerdan contigo.</p></details></div></div></section>
+<section class="section social-section" id="redes-sociales" aria-labelledby="social-title"><div class="container"><div class="section-heading"><div><p class="eyebrow accent">05 / CONECTA CON NOSOTROS</p><h2 id="social-title">También estamos<br><span>en redes sociales.</span></h2></div><p>Un espacio para compartir nuestro trabajo, consejos de tecnología y proyectos web.</p></div><div class="social-grid"><article class="social-card social-instagram"><div class="social-card-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></div><h3>Instagram</h3><p>Fotos de trabajos, mantenimiento y consejos para cuidar tus equipos.</p><span class="social-pending">Perfil próximamente</span></article>
+<article class="social-card social-facebook"><div class="social-card-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M14 22v-9h3l.5-4H14V7c0-1 .3-2 2-2h2V1.5A25 25 0 0 0 15 1c-3 0-5 2-5 5v3H7v4h3v9z"/></svg></div><h3>Facebook</h3><p>Servicios, novedades y contenido para nuestra comunidad.</p><span class="social-pending">Perfil próximamente</span></article>
+<article class="social-card social-github"><div class="social-card-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.82c.85 0 1.71.11 2.51.33 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.58 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></div><h3>GitHub</h3><p>Proyectos de desarrollo web y código de nuestras soluciones.</p><span class="social-pending">Perfil próximamente</span></article></div></div></section>
+  <section class="closing section"><div class="container"><p class="eyebrow">MÁS VIDA PARA TU EQUIPO. MÁS OPCIONES PARA TU NEGOCIO.</p><h2>Empecemos con<br>una solución sencilla.</h2><a class="button primary" href="#cotizador-express">Consultar un servicio ↗</a></div></section>
+</main>
 
-    <div class="floating-actions" aria-label="Accesos rapidos">
-        <a class="floating-button floating-home" href="#" data-panel-target="0" aria-label="Volver al inicio">
-            <span aria-hidden="true">↑</span>
-        </a>
-        <button class="floating-button floating-whatsapp" type="button" data-chat-toggle aria-expanded="false" aria-controls="support-chat" aria-label="Abrir asistente de WhatsApp">
-            <span aria-hidden="true">WA</span>
-        </button>
-    </div>
+<footer class="site-footer"><div class="container footer-row"><div><a class="brand" href="#inicio"><strong>TECHFIX <em>PRO</em></strong></a><p>Computadoras, celulares y desarrollo web.</p></div><nav aria-label="Navegación del pie de página"><a href="#servicios">Servicios</a><a href="#preguntas">Preguntas frecuentes</a><a href="#redes-sociales">Redes sociales</a><a href="#cotizador-express">Solicitar cotización</a></nav></div></footer>
+<button id="chat-launcher" class="chat-launcher" type="button" aria-label="Abrir asistente de atención por WhatsApp" aria-expanded="false" aria-controls="support-chat"><svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11.3 19.4L3 29l6.8-1.8A13 13 0 1 0 16 3zm0 2.4a10.6 10.6 0 1 1-5.4 19.7l-.4-.2-3.8 1 1-3.7-.3-.4A10.6 10.6 0 0 1 16 5.4zm-4.5 5c-.3 0-.6.1-.8.4-.8.8-1.1 1.6-1 2.6.2 2.8 3.3 6.5 6.9 8 .9.4 2.1.7 3 .4.8-.3 1.8-1.2 1.9-2.1.1-.3 0-.5-.3-.6l-2.5-1.2c-.3-.2-.5-.1-.7.2l-1 1.2c-.2.2-.4.2-.7.1-1.6-.7-3-1.9-3.9-3.4-.2-.3-.1-.5.1-.7l.8-1c.2-.2.2-.4.1-.7l-1.1-2.7c-.1-.4-.4-.5-.8-.5z"/></svg><span>¿Te ayudamos?</span></button>
+<section id="support-chat" class="support-chat" role="dialog" aria-labelledby="chat-title" hidden><header class="chat-header"><div><strong id="chat-title">Asistente de soporte</strong><small>Preguntas básicas · Resumen para WhatsApp</small></div><button id="chat-close" type="button" aria-label="Cerrar conversación">×</button></header><div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div><p id="chat-feedback" class="chat-feedback" role="status"></p><button id="chat-review" class="chat-restart" type="button" hidden>Revisar resumen para WhatsApp</button><form id="chat-form" class="chat-compose"><label for="chat-answer">Tu respuesta</label><div><input id="chat-answer" maxlength="600" autocomplete="off" required placeholder="Escribe aquí…"><button type="submit" aria-label="Enviar respuesta">➤</button></div></form><div id="chat-summary" class="chat-summary" hidden><label for="chat-summary-text">Resumen para el técnico</label><textarea id="chat-summary-text" rows="4" maxlength="3000"></textarea><a id="chat-whatsapp" class="button primary" target="_blank" rel="noopener" hidden>Continuar en WhatsApp</a><button id="chat-copy" class="button secondary" type="button">Copiar resumen</button><p id="chat-status" role="status"></p></div><button id="chat-restart" class="chat-restart" type="button">Empezar de nuevo</button></section>
 
-    <aside class="virtual-assistant chat-widget" id="support-chat" aria-labelledby="assistant-title" aria-hidden="true">
-        <p class="assistant-label">Asistente virtual</p>
-        <h3 id="assistant-title">Hola, soy tu filtro tecnico.</h3>
-        <p data-bot-question>Te hare unas preguntas cortas para mandar el reporte completo por WhatsApp.</p>
-        <div class="bot-answers" data-bot-answers aria-live="polite"></div>
-        <div class="bot-controls">
-            <input type="text" data-bot-input placeholder="Escribe aqui tu respuesta" aria-label="Respuesta para el asistente">
-            <button type="button" data-bot-next>Responder</button>
-        </div>
-        <div class="assistant-options" data-bot-options></div>
-        <div class="bot-actions">
-            <button type="button" data-bot-back>Anterior</button>
-            <button type="button" data-bot-reset>Reiniciar</button>
-        </div>
-    </aside>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
 </body>
 </html>
