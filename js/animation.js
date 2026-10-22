@@ -23,6 +23,15 @@ document.addEventListener('keydown', event => {
   }
 });
 window.matchMedia('(min-width: 1024px)').addEventListener('change', closeMenu);
+const mobileMenuViewport = window.matchMedia('(max-width: 1023px)');
+let previousMenuScroll = Math.max(0, window.scrollY);
+window.addEventListener('scroll', () => {
+  const currentScroll = Math.max(0, window.scrollY);
+  if (mobileMenuViewport.matches && currentScroll > previousMenuScroll && navigation.classList.contains('is-open')) {
+    closeMenu();
+  }
+  previousMenuScroll = currentScroll;
+}, {passive:true});
 
 /* Asistente guiado local: las respuestas permanecen en esta pestaña. */
 const launcher = document.querySelector('#chat-launcher');
@@ -249,7 +258,7 @@ async function initSectionScroll() {
     return shell;
   });
   let syncReveals = () => {};
-  gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
+  gsap.matchMedia().add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
     shells.forEach((shell,index) => {
       if(index === shells.length - 1) return;
       const panel = panels[index];
