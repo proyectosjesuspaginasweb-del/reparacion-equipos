@@ -248,6 +248,7 @@ async function initSectionScroll() {
     shell.className = 'scroll-shell'; panel.before(shell); shell.append(panel);
     return shell;
   });
+  let syncReveals = () => {};
   gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
     shells.forEach((shell,index) => {
       if(index === shells.length - 1) return;
@@ -263,6 +264,155 @@ async function initSectionScroll() {
         }
       });
     });
+
+    const revealSelectors = new Map([
+      ['servicios', '.section-heading > *, .service-card, .service-next'],
+      ['servicios-soporte', '.section-heading > *, .service-card'],
+      ['proceso', '.section-heading > *, .steps > li'],
+      ['cotizador-express', '.container > *'],
+      ['preguntas', '.faq-grid > :first-child, .faq-list details'],
+      ['redes-sociales', '.section-heading > *, .social-card']
+    ]);
+
+    const compact = matchMedia('(max-width: 767px)').matches;
+    const revealCleanups = [];
+    const pendingReveals = new Map();
+    syncReveals = (panel) => {
+      pendingReveals.forEach((state, element) => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top >= innerHeight * .85 || rect.bottom <= header.offsetHeight) return;
+        if (element.contains(document.activeElement)) {
+          state.tween.progress(1).pause();
+          state.armed = false;
+        } else if (state.armed || panel?.contains(element)) {
+          state.armed = false;
+          state.tween.restart(true);
+        }
+      });
+    };
+    // Entrada dentro de la pantalla; rearme sólo al salir por completo.
+    // Los márgenes separados evitan reinicios al oscilar cerca del borde.
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const state = pendingReveals.get(entry.target);
+        if (!state?.armed || entry.target.contains(document.activeElement)) return;
+        state.armed = false;
+        state.tween.restart(true);
+      });
+    }, {rootMargin:'0px 0px -15% 0px'});
+    const exitObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const state = pendingReveals.get(entry.target);
+        if (entry.isIntersecting || !state || state.armed) return;
+        if (entry.target.contains(document.activeElement)) return;
+        // Rearma fuera de pantalla, sin mostrar primero la tarjeta al regresar.
+        state.tween.progress(1).pause();
+        gsap.set(entry.target, {opacity:0});
+        state.armed = true;
+      });
+    }, {rootMargin:'60px 0px 60px 0px'});
+    function reveal(element, index, direction = 'up') {
+      const serviceEntry = element.matches('#servicios .service-card, #servicios-soporte .service-card');
+      const distance = serviceEntry ? 150 : (compact ? 20 : 40);
+      const x = direction === 'left' ? -distance : direction === 'right' ? distance : 0;
+      const tween = gsap.fromTo(element, {
+        opacity:0,
+        x, y:x ? 0 : (compact ? 28 : 44)
+      }, {
+        opacity:1,
+        x:0, y:0,
+        duration:2,
+        delay:serviceEntry ? index * .04 : (index % 3) * .14,
+        ease:serviceEntry ? 'power4.out' : 'power2.inOut',
+        paused:true,
+        immediateRender:false,
+        clearProps:'opacity,transform',
+      });
+      gsap.set(element, {opacity:0});
+      pendingReveals.set(element, {tween, armed:true});
+      revealObserver.observe(element);
+      exitObserver.observe(element);
+      // El teclado muestra inmediatamente el control enfocado y su contenido.
+      const showOnFocus = () => {
+        pendingReveals.get(element).armed = false;
+        tween.progress(1).pause();
+      };
+      element.addEventListener('focusin', showOnFocus);
+      revealCleanups.push(() => element.removeEventListener('focusin', showOnFocus));
+    }
+
+    panels.forEach(panel => {
+      const selector = revealSelectors.get(panel.id) || (panel.classList.contains('closing') ? '.container > *' : '');
+      if (!selector) return;
+
+      panel.querySelectorAll(selector).forEach((element,index) => {
+        let direction = 'up';
+        let sequenceIndex = index;
+        if (['servicios', 'servicios-soporte'].includes(panel.id) && element.matches('.service-card')) {
+          // Variante lateral del ejemplo: x:150 hasta x:0 en ambas secciones.
+          direction = 'right';
+          const grid = element.parentElement;
+          const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+          sequenceIndex = [...grid.children].indexOf(element) % columns;
+        } else if (element.parentElement.matches('.section-heading')) {
+          direction = index % 2 ? 'right' : 'left';
+        } else if (panel.id === 'preguntas') {
+          direction = element.matches('details') ? 'right' : 'left';
+        } else if (element.matches('.steps > li, .social-card')) {
+          direction = index % 2 ? 'left' : 'right';
+        }
+        reveal(element, sequenceIndex, direction);
+      });
+    });
+
+    const footerItems = document.querySelectorAll('.site-footer .footer-row > *');
+    footerItems.forEach((element,index) => {
+      reveal(element, index);
+    });
+
+    const hero = document.querySelector('#inicio');
+    if (hero && (!location.hash || location.hash === '#inicio')) {
+      const heroTag = hero.querySelector('.hero-tag');
+      const heroCopy = hero.querySelector('.hero-copy');
+      const heroActions = hero.querySelectorAll('.actions > *');
+      const heroNotes = hero.querySelectorAll('.hero-notes > *');
+      const equipmentPanel = hero.querySelector('.equipment-panel');
+      const categoryItems = hero.querySelectorAll('.category-strip > *');
+
+      gsap.timeline({defaults:{ease:'power3.out'}})
+        .fromTo(heroTag, {autoAlpha:0,y:16}, {
+          autoAlpha:1,y:0,duration:.5,clearProps:'opacity,visibility,transform'
+        }, 0)
+        .fromTo(heroCopy?.querySelector('.eyebrow'), {autoAlpha:0,y:18}, {
+          autoAlpha:1,y:0,duration:.5,clearProps:'opacity,visibility,transform'
+        }, .1)
+        .fromTo(hero.querySelector('.heading-tilt'), {autoAlpha:0,y:24}, {
+          autoAlpha:1,y:0,duration:.7,clearProps:'opacity,visibility,transform'
+        }, .2)
+        .fromTo(heroCopy?.querySelector('.lead'), {autoAlpha:0,y:18}, {
+          autoAlpha:1,y:0,duration:.55,clearProps:'opacity,visibility,transform'
+        }, .35)
+        .fromTo(heroActions, {autoAlpha:0,y:16}, {
+          autoAlpha:1,y:0,duration:.45,stagger:.1,clearProps:'opacity,visibility,transform'
+        }, .5)
+        .fromTo(equipmentPanel, {autoAlpha:0,y:24,scale:.97}, {
+          autoAlpha:1,y:0,scale:1,duration:.75,clearProps:'opacity,visibility,transform'
+        }, .2)
+        .fromTo(heroNotes, {autoAlpha:0,y:12}, {
+          autoAlpha:1,y:0,duration:.4,stagger:.08,clearProps:'opacity,visibility,transform'
+        }, .8)
+        .fromTo(categoryItems, {autoAlpha:0,y:16}, {
+          autoAlpha:1,y:0,duration:.45,stagger:.08,clearProps:'opacity,visibility,transform'
+        }, .9);
+    }
+    return () => {
+      revealObserver.disconnect();
+      exitObserver.disconnect();
+      pendingReveals.clear();
+      syncReveals = () => {};
+      revealCleanups.forEach(cleanup => cleanup());
+    };
   });
   // Usa la posición natural del panel, incluso mientras está fijado.
   function navigateToPanel(id) {
@@ -274,7 +424,10 @@ async function initSectionScroll() {
     window.scrollTo({top:id === 'inicio' ? 0 : Math.max(0,top-header.offsetHeight),behavior:'instant'});
     // Sincroniza los paneles fijados en el mismo frame del salto de navegación.
     ScrollTrigger.refresh();
-    requestAnimationFrame(() => ScrollTrigger.update());
+    requestAnimationFrame(() => {
+      ScrollTrigger.update();
+      syncReveals(panels[index]);
+    });
     return true;
   }
   document.querySelectorAll('#main-navigation a, a[href="#servicios"], a[href="#servicios-soporte"], a[href="#inicio"]').forEach(link => {
@@ -291,6 +444,7 @@ async function initSectionScroll() {
   window.addEventListener('hashchange', () => navigateToPanel(location.hash.slice(1)));
   ScrollTrigger.refresh();
   if(location.hash) navigateToPanel(location.hash.slice(1));
+  requestAnimationFrame(() => syncReveals());
 }
 initSectionScroll();
 

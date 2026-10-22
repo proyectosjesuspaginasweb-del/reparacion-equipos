@@ -945,7 +945,8 @@ input::placeholder,textarea::placeholder {
 .chat-choices button:focus-visible { outline: 2px solid #25d366; outline-offset: 2px; }
 
 /* Paneles opacos superpuestos: el siguiente entra mientras el anterior se aleja. */
-.scroll-shell { position: relative; width: 100%; }
+.scroll-shell { position: relative; width: 100%; overflow-x: clip; }
+.site-footer { overflow-x: clip; }
 .scroll-shell > .section { position: relative; background-color: #0e0e12; min-height: calc(100svh - 81px); }
 .scroll-shell > .section-alt { background-color: #17171d; }
 .scroll-shell > .section { box-shadow: 0 -18px 60px #0006; }
