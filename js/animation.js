@@ -258,8 +258,14 @@ async function initSectionScroll() {
     return shell;
   });
   let syncReveals = () => {};
-  gsap.matchMedia().add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-    shells.forEach((shell,index) => {
+  gsap.matchMedia().add({
+    desktop:'(min-width: 1024px)',
+    mobile:'(max-width: 1023px)',
+    reduced:'(prefers-reduced-motion: reduce)'
+  }, context => {
+    if (context.conditions.reduced) return;
+    const mobile = context.conditions.mobile;
+    if (!mobile) shells.forEach((shell,index) => {
       if(index === shells.length - 1) return;
       const panel = panels[index];
       gsap.fromTo(panel, {scale:1, opacity:1}, {
@@ -282,6 +288,7 @@ async function initSectionScroll() {
       ['preguntas', '.faq-grid > :first-child, .faq-list details'],
       ['redes-sociales', '.section-heading > *, .social-card']
     ]);
+    if (mobile) revealSelectors.set('inicio', '.hero-tag, .hero-copy, .equipment-panel, .category-strip > *');
 
     const compact = matchMedia('(max-width: 767px)').matches;
     const revealCleanups = [];
@@ -322,8 +329,9 @@ async function initSectionScroll() {
       });
     }, {rootMargin:'60px 0px 60px 0px'});
     function reveal(element, index, direction = 'up') {
+      if (mobile) direction = 'left';
       const serviceEntry = element.matches('#servicios .service-card, #servicios-soporte .service-card');
-      const distance = serviceEntry ? 150 : (compact ? 20 : 40);
+      const distance = mobile ? 40 : (serviceEntry ? 150 : (compact ? 20 : 40));
       const x = direction === 'left' ? -distance : direction === 'right' ? distance : 0;
       const tween = gsap.fromTo(element, {
         opacity:0,
@@ -381,7 +389,7 @@ async function initSectionScroll() {
     });
 
     const hero = document.querySelector('#inicio');
-    if (hero && (!location.hash || location.hash === '#inicio')) {
+    if (!mobile && hero && (!location.hash || location.hash === '#inicio')) {
       const heroTag = hero.querySelector('.hero-tag');
       const heroCopy = hero.querySelector('.hero-copy');
       const heroActions = hero.querySelectorAll('.actions > *');
